@@ -1,11 +1,11 @@
 # kcolbchain — public brand kit
 
-Open **design tokens** and an interactive **playground** for the kcolbchain visual identity (yellow + neon cyan, hexagon mark, motion studies). This is **not** the production marketing site: there is no Listmonk, join flows, or private copy here.
+Open **design tokens** for the kcolbchain visual identity. One typeface (JetBrains Mono), three colors, a spacing scale. Space is the design. This is **not** the production marketing site.
 
 | Asset | Purpose |
 |--------|---------|
-| `tokens.css` | `:root` variables for dark UI — import or copy into your app |
-| `index.html` | Self-contained demo: particles, logo animations, colour swatches, project identity grid |
+| `tokens.css` | `:root` variables — type, color, space. Import or copy. |
+| `index.html` | The brand kit itself — type specimen, color, space, principles |
 
 **Live site:** enable GitHub Pages on this repo (root `/`) → `https://kcolbchain.github.io/brand/`
 

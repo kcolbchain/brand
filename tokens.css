@@ -1,26 +1,42 @@
-/* kcolbchain — design tokens (public brand kit)
- * Use with Inter + JetBrains Mono (see index.html font links).
- * Source of truth for production site is private; this file is the public export.
+/* kcolbchain — design tokens
+ * One typeface. Three colors. A spacing scale.
+ * Space is the design; restraint is the brand.
  */
 :root {
-  --bg:       #0a0a0f;
-  --bg-card:  #12121a;
-  --bg-hover: #1a1a26;
-  --border:   #1e1e2e;
-  --text:     #e0e0e8;
-  --text-dim: #8888a0;
-  /* Logo yellow + neon cyan */
-  --brand:       #f5e03a;
-  --brand-hover: #e8d030;
-  --brand-muted: rgba(245, 224, 58, 0.14);
-  --accent:      #2fd4ff;
-  --accent-dim:  #1cb8db;
-  --accent-muted: rgba(47, 212, 255, 0.12);
-  --accent-glow:  rgba(47, 212, 255, 0.32);
-  --accent-2:    var(--brand);
-  --white:    #f5f5fa;
-  --radius:   10px;
-  --radius-lg: 14px;
-  --shadow:   0 14px 34px rgba(0, 0, 0, 0.45);
-  --max-w:    1120px;
+  /* Surfaces — near-black, one elevation, hairline borders */
+  --bg:        #0b0b0d;
+  --bg-elev:   #131316;
+  --line:      #1f1f24;
+
+  /* Type — three weights of grey, nothing more */
+  --fg:        #ededf0;
+  --fg-muted:  #8a8a92;
+  --fg-faint:  #5a5a62;
+
+  /* The mark — used once per view, by intent */
+  --mark:      #f5e03a;
+  --mark-soft: rgba(245, 224, 58, 0.14);
+
+  /* Type system — JetBrains Mono, with system mono as fallback */
+  --font: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --t-1:  11px;   /* labels, captions */
+  --t-2:  13px;   /* body */
+  --t-3:  15px;   /* emphasis */
+  --t-4:  20px;   /* subhead */
+  --t-5:  28px;   /* section heading */
+  --t-6:  44px;   /* wordmark */
+
+  /* Space — the brand. Scale roughly doubles. */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 16px;
+  --s-4: 24px;
+  --s-5: 40px;
+  --s-6: 64px;
+  --s-7: 96px;
+  --s-8: 160px;
+
+  /* Structure */
+  --col:    720px;
+  --radius: 4px;
 }

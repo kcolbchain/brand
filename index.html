@@ -3,938 +3,349 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kcolbchain — Brand kit</title>
-  <meta name="description" content="Open design tokens and visual identity playground for the kcolbchain collective. Not the production website." />
-  <link rel="shortcut icon" href="https://kcolbchain.com/images/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <title>kcolbchain — brand</title>
+  <meta name="description" content="One typeface. Three colors. A spacing scale. The kcolbchain visual identity." />
+  <link rel="shortcut icon" href="https://kcolbchain.com/images/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tokens.css" />
   <style>
-    /* ===== Tokens ===== */
-    :root {
-      --bg:       #0a0a0f;
-      --bg-card:  #12121a;
-      --bg-hover: #1a1a26;
-      --border:   #1e1e2e;
-      --text:     #e0e0e8;
-      --text-dim: #8888a0;
-      --brand:    #f5e03a;
-      --brand-hover: #e8d030;
-      --accent:   #2fd4ff;
-      --accent-dim: #1cb8db;
-      --accent-glow: rgba(47,212,255,.32);
-      --white:    #f5f5fa;
-      --radius:   10px;
-      --radius-lg: 14px;
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
 
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: var(--font);
+      font-size: var(--t-2);
       line-height: 1.6;
-      overflow-x: hidden;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--fg-muted);
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    a { color: var(--accent); text-decoration: none; transition: color .15s; }
-    a:hover { color: var(--brand); }
-
-    /* ===== Canvas background ===== */
-    #particle-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+    a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      transition: border-color .15s ease, color .15s ease;
+    }
+    a:hover {
+      color: var(--mark);
+      border-bottom-color: var(--mark);
     }
 
     /* ===== Header ===== */
-    .pg-header {
+    header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 32px;
-      background: rgba(10,10,15,.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: var(--s-3) var(--s-4);
+      font-size: var(--t-1);
+      background: rgba(11, 11, 13, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
     }
-    .pg-header-brand {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: .9rem;
-      color: var(--white);
-    }
-    .pg-header-brand span { color: var(--brand); }
-    .pg-header-links { display: flex; gap: 20px; font-size: .85rem; }
-    .pg-header-links a { color: var(--text-dim); }
-    .pg-header-links a:hover { color: var(--white); }
+    header .wm { color: var(--fg); font-weight: 500; }
+    header .wm em { color: var(--mark); font-style: normal; font-weight: 700; }
+    header nav { display: flex; gap: var(--s-4); }
+    header nav a { color: var(--fg-faint); border-bottom: none; }
+    header nav a:hover { color: var(--fg); border-bottom: none; }
 
-    /* ===== Sections ===== */
-    .section {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 32px 80px;
-    }
-
-    .section-inner {
-      max-width: 1120px;
-      width: 100%;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -.03em;
-      margin-bottom: 12px;
-    }
-    h2 {
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -.02em;
-      margin-bottom: 8px;
-    }
-    .subtitle {
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      max-width: 540px;
-      margin: 0 auto 40px;
-    }
-
-    /* ===== Hero logo — SVG hexagons ===== */
-    .hero-logo-wrap {
-      position: relative;
-      width: 280px;
-      height: 280px;
-      margin: 0 auto 48px;
-      cursor: pointer;
-    }
-
-    .hero-logo-svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 0 40px rgba(245,224,58,.25));
-      transition: filter .4s;
-    }
-    .hero-logo-wrap:hover .hero-logo-svg {
-      filter: drop-shadow(0 0 60px rgba(245,224,58,.45)) drop-shadow(0 0 120px rgba(47,212,255,.2));
-    }
-
-    /* Hexagon layers */
-    .hex-outer, .hex-mid, .hex-inner {
-      transform-origin: center;
-      transition: transform .6s cubic-bezier(.25,.46,.45,.94);
-    }
-    .hero-logo-wrap:hover .hex-outer { transform: rotate(30deg) scale(1.05); }
-    .hero-logo-wrap:hover .hex-mid   { transform: rotate(-20deg) scale(1.08); }
-    .hero-logo-wrap:hover .hex-inner { transform: rotate(15deg) scale(1.12); }
-
-    /* Pulse ring */
-    .pulse-ring {
-      position: absolute;
-      inset: -20px;
-      border-radius: 50%;
-      border: 1.5px solid var(--brand);
-      opacity: 0;
-      animation: pulse-out 3s ease-out infinite;
-    }
-    .pulse-ring:nth-child(2) { animation-delay: 1s; }
-    .pulse-ring:nth-child(3) { animation-delay: 2s; }
-
-    @keyframes pulse-out {
-      0%   { transform: scale(.85); opacity: .5; }
-      100% { transform: scale(1.6); opacity: 0; }
-    }
-
-    /* ===== Wordplay hero ===== */
-    .hero-wordplay {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 700;
-      color: var(--brand);
-      letter-spacing: -.04em;
-      margin-bottom: 8px;
-      perspective: 600px;
-    }
-    .wp-char {
-      display: inline-block;
-      transform-origin: center center;
-      transition: transform .45s cubic-bezier(.4,0,.2,1), opacity .25s, color .3s;
-    }
-    .wp-char.flip {
-      transform: rotateX(90deg);
-      opacity: 0;
-    }
-    .hero-wordplay-sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      color: var(--text-dim);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    /* ===== Controls bar ===== */
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
-    .ctrl-btn {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .8rem;
-      font-weight: 600;
-      padding: 10px 20px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--bg-card);
-      color: var(--text);
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .ctrl-btn:hover { border-color: var(--accent); color: var(--white); background: var(--bg-hover); }
-    .ctrl-btn.active { border-color: var(--brand); color: var(--brand); background: rgba(245,224,58,.08); }
-
-    /* ===== Logo animation showcase ===== */
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 24px;
-      text-align: center;
-    }
-
-    .showcase-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 32px 24px;
-      transition: border-color .3s, box-shadow .3s;
-      overflow: hidden;
-    }
-    .showcase-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 40px var(--accent-glow);
-    }
-
-    .showcase-card h3 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-    .showcase-card p {
-      font-size: .78rem;
-      color: var(--text-dim);
-      margin-bottom: 20px;
-    }
-
-    .showcase-logo {
-      width: 100px;
-      height: 100px;
+    /* ===== Layout ===== */
+    main {
+      max-width: var(--col);
       margin: 0 auto;
+      padding: var(--s-8) var(--s-4);
     }
+    section { padding: var(--s-8) 0; }
+    section:first-of-type { padding-top: 0; }
 
-    /* Animation variants */
-    .anim-spin .hex-outer  { animation: spin-cw 8s linear infinite; }
-    .anim-spin .hex-mid    { animation: spin-ccw 6s linear infinite; }
-    .anim-spin .hex-inner  { animation: spin-cw 4s linear infinite; }
-
-    .anim-breathe .hex-outer { animation: breathe 3s ease-in-out infinite; }
-    .anim-breathe .hex-mid   { animation: breathe 3s ease-in-out infinite .5s; }
-    .anim-breathe .hex-inner { animation: breathe 3s ease-in-out infinite 1s; }
-
-    .anim-glitch .hex-outer { animation: glitch-1 3s step-end infinite; }
-    .anim-glitch .hex-mid   { animation: glitch-2 3s step-end infinite .1s; }
-    .anim-glitch .hex-inner { animation: glitch-3 3s step-end infinite .2s; }
-
-    .anim-orbit .hex-outer { animation: orbit-outer 6s ease-in-out infinite; }
-    .anim-orbit .hex-mid   { animation: orbit-mid 5s ease-in-out infinite; }
-    .anim-orbit .hex-inner { animation: orbit-inner 4s ease-in-out infinite; }
-
-    .anim-morph .hex-outer { animation: morph-hex 4s ease-in-out infinite; }
-    .anim-morph .hex-mid   { animation: morph-hex 4s ease-in-out infinite .3s; }
-    .anim-morph .hex-inner { animation: morph-hex 4s ease-in-out infinite .6s; }
-
-    .anim-neon .hex-outer { animation: neon-flicker 2s ease-in-out infinite; }
-    .anim-neon .hex-mid   { animation: neon-glow 3s ease-in-out infinite; fill: var(--accent) !important; }
-    .anim-neon .hex-inner { animation: neon-flicker 2s ease-in-out infinite .5s; }
-
-    @keyframes spin-cw  { to { transform: rotate(360deg); } }
-    @keyframes spin-ccw { to { transform: rotate(-360deg); } }
-
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50%      { transform: scale(1.12); opacity: .7; }
-    }
-
-    @keyframes glitch-1 {
-      0%, 90%, 100% { transform: translate(0); }
-      92% { transform: translate(-3px, 2px); }
-      94% { transform: translate(4px, -1px); }
-      96% { transform: translate(-2px, -3px); }
-    }
-    @keyframes glitch-2 {
-      0%, 88%, 100% { transform: translate(0); }
-      90% { transform: translate(3px, -2px); }
-      93% { transform: translate(-4px, 1px); }
-      95% { transform: translate(2px, 3px); }
-    }
-    @keyframes glitch-3 {
-      0%, 85%, 100% { transform: translate(0); }
-      87% { transform: translate(-2px, -3px); }
-      91% { transform: translate(3px, 2px); }
-      94% { transform: translate(-1px, -2px); }
-    }
-
-    @keyframes orbit-outer {
-      0%, 100% { transform: rotate(0deg) translateX(0); }
-      25%  { transform: rotate(5deg) translateX(4px); }
-      50%  { transform: rotate(0deg) translateX(0); }
-      75%  { transform: rotate(-5deg) translateX(-4px); }
-    }
-    @keyframes orbit-mid {
-      0%, 100% { transform: rotate(0deg) translateY(0); }
-      33%  { transform: rotate(-8deg) translateY(-5px); }
-      66%  { transform: rotate(8deg) translateY(5px); }
-    }
-    @keyframes orbit-inner {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50%  { transform: scale(1.15) rotate(10deg); }
-    }
-
-    @keyframes morph-hex {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      25%  { transform: scale(1.1) rotate(15deg); }
-      50%  { transform: scale(.9) rotate(-10deg); }
-      75%  { transform: scale(1.05) rotate(5deg); }
-    }
-
-    @keyframes neon-flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-      20%, 24%, 55% { opacity: .4; }
-    }
-    @keyframes neon-glow {
-      0%, 100% { filter: drop-shadow(0 0 4px var(--accent)); }
-      50%      { filter: drop-shadow(0 0 20px var(--accent)) drop-shadow(0 0 40px var(--accent)); }
-    }
-
-    /* ===== Project identity ===== */
-    .project-id-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .project-id-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 28px 20px;
-      text-align: center;
-      transition: all .4s cubic-bezier(.25,.46,.45,.94);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-id-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 120%, var(--card-glow, rgba(245,224,58,.06)), transparent 70%);
-      opacity: 0;
-      transition: opacity .4s;
-    }
-    .project-id-card:hover::before { opacity: 1; }
-    .project-id-card:hover {
-      border-color: var(--card-accent, var(--brand));
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px var(--card-glow, rgba(245,224,58,.12));
-    }
-
-    .project-id-logo {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 16px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .project-id-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: .9rem;
-      color: var(--white);
-      margin-bottom: 4px;
-      position: relative;
-      z-index: 1;
-    }
-    .project-id-desc {
-      font-size: .75rem;
-      color: var(--text-dim);
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ===== Interactive canvas section ===== */
-    .canvas-section {
-      position: relative;
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    #interactive-canvas {
-      display: block;
-      width: 100%;
-      height: 500px;
-      cursor: crosshair;
-    }
-    .canvas-hint {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .75rem;
-      color: var(--text-dim);
-      background: rgba(10,10,15,.7);
-      padding: 8px 16px;
-      border-radius: var(--radius);
-      pointer-events: none;
-    }
-
-    /* ===== Color palette ===== */
-    .palette-row {
+    /* ===== Hero — the wordmark is the mark ===== */
+    .hero {
+      min-height: 70vh;
       display: flex;
-      gap: 16px;
+      flex-direction: column;
       justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
+      padding-top: 0;
     }
-    .swatch {
-      width: 80px;
-      height: 80px;
+    .wordmark {
+      font-size: var(--t-6);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin-bottom: var(--s-4);
+    }
+    .wordmark em {
+      color: var(--mark);
+      font-style: normal;
+    }
+    .hero p {
+      font-size: var(--t-3);
+      color: var(--fg-muted);
+      max-width: 52ch;
+    }
+
+    /* ===== Section heads ===== */
+    h2 {
+      font-size: var(--t-1);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--fg-faint);
+      margin-bottom: var(--s-5);
+    }
+    h2::before {
+      content: '— ';
+      color: var(--fg-faint);
+    }
+
+    p + p { margin-top: var(--s-3); }
+    p .fg { color: var(--fg); }
+
+    /* ===== Type specimen ===== */
+    .type-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      align-items: baseline;
+      gap: var(--s-4);
+      padding: var(--s-3) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-row .label {
+      font-size: var(--t-1);
+      color: var(--fg-faint);
+    }
+    .type-row .sample { color: var(--fg); }
+    .s-t1 { font-size: var(--t-1); }
+    .s-t2 { font-size: var(--t-2); }
+    .s-t3 { font-size: var(--t-3); }
+    .s-t4 { font-size: var(--t-4); }
+    .s-t5 { font-size: var(--t-5); }
+    .s-t6 { font-size: var(--t-6); font-weight: 700; letter-spacing: -0.02em; }
+
+    /* ===== Color ===== */
+    .color-row {
+      display: grid;
+      grid-template-columns: 32px 120px 1fr;
+      align-items: center;
+      gap: var(--s-4);
+      padding: var(--s-3) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .color-row:last-child { border-bottom: none; }
+    .chip {
+      width: 28px;
+      height: 28px;
       border-radius: var(--radius);
-      border: 1px solid var(--border);
-      position: relative;
+      border: 1px solid var(--line);
+    }
+    .color-row .name { color: var(--fg); font-size: var(--t-2); }
+    .color-row .hex {
+      color: var(--fg-faint);
+      font-size: var(--t-1);
       cursor: pointer;
-      transition: transform .2s, box-shadow .3s;
+      user-select: all;
     }
-    .swatch:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 24px rgba(255,255,255,.1);
+    .color-row .hex:hover { color: var(--fg-muted); }
+
+    /* ===== Space ===== */
+    .space-row {
+      display: grid;
+      grid-template-columns: 80px 80px 1fr;
+      align-items: center;
+      gap: var(--s-4);
+      padding: var(--s-2) 0;
     }
-    .swatch-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .65rem;
-      color: var(--text-dim);
-      margin-top: 8px;
-      text-align: center;
+    .space-row .token {
+      font-size: var(--t-1);
+      color: var(--fg-faint);
     }
+    .space-row .px {
+      font-size: var(--t-1);
+      color: var(--fg-muted);
+    }
+    .space-row .bar {
+      height: 1px;
+      background: var(--fg-muted);
+    }
+
+    /* ===== Usage block ===== */
+    pre {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-3) var(--s-4);
+      font-size: var(--t-2);
+      color: var(--fg);
+      overflow-x: auto;
+      margin-top: var(--s-4);
+    }
+    code { font-family: var(--font); }
 
     /* ===== Footer ===== */
-    .pg-footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 48px 32px;
-      font-size: .8rem;
-      color: var(--text-dim);
-      border-top: 1px solid var(--border);
+    footer {
+      max-width: var(--col);
+      margin: 0 auto;
+      padding: var(--s-6) var(--s-4) var(--s-7);
+      font-size: var(--t-1);
+      color: var(--fg-faint);
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--s-3);
     }
-    .pg-footer a { color: var(--accent); }
+    footer a { color: var(--fg-faint); border-bottom: none; }
+    footer a:hover { color: var(--fg); border-bottom: none; }
+    footer nav { display: flex; gap: var(--s-4); }
 
-    /* ===== Responsive ===== */
-    @media (max-width: 640px) {
-      .section { padding: 100px 20px 60px; }
-      .hero-logo-wrap { width: 200px; height: 200px; }
-      .showcase-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-      .showcase-logo { width: 64px; height: 64px; }
-      .project-id-grid { grid-template-columns: repeat(2, 1fr); }
-      .pg-header { padding: 12px 16px; }
-      #interactive-canvas { height: 320px; }
+    @media (max-width: 560px) {
+      main { padding: var(--s-7) var(--s-3); }
+      section { padding: var(--s-6) 0; }
+      .wordmark { font-size: 32px; }
+      header { padding: var(--s-3); }
+      header nav { gap: var(--s-3); }
+      .type-row { grid-template-columns: 60px 1fr; gap: var(--s-3); }
+      .color-row { grid-template-columns: 28px 100px 1fr; gap: var(--s-3); }
+      .space-row { grid-template-columns: 60px 60px 1fr; gap: var(--s-3); }
+      footer { flex-direction: column; padding: var(--s-5) var(--s-3); }
     }
   </style>
 </head>
 <body>
 
-<canvas id="particle-canvas"></canvas>
-
-<header class="pg-header">
-  <a class="pg-header-brand" href="https://kcolbchain.com"><span>kcolb</span>chain <span style="color:var(--text-dim);font-weight:400">/ brand</span></a>
-  <nav class="pg-header-links">
-    <a href="https://kcolbchain.com" rel="noopener noreferrer">Website</a>
-    <a href="https://docs.kcolbchain.com" target="_blank" rel="noopener noreferrer">Docs</a>
-    <a href="https://github.com/kcolbchain" target="_blank" rel="noopener noreferrer">GitHub</a>
+<header>
+  <a class="wm" href="https://kcolbchain.com"><em>kcolb</em>chain &nbsp;/&nbsp; brand</a>
+  <nav>
+    <a href="https://kcolbchain.com">site</a>
+    <a href="https://docs.kcolbchain.com">docs</a>
+    <a href="https://github.com/kcolbchain">github</a>
   </nav>
 </header>
 
-<!-- ===== 1. Hero ===== -->
-<section class="section" id="hero">
-  <div class="section-inner">
-    <div class="hero-logo-wrap" id="hero-logo">
-      <div class="pulse-ring"></div>
-      <div class="pulse-ring"></div>
-      <div class="pulse-ring"></div>
-      <svg class="hero-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="grad-brand" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f5e03a"/>
-            <stop offset="100%" stop-color="#e8d030"/>
-          </linearGradient>
-          <linearGradient id="grad-accent" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2fd4ff"/>
-            <stop offset="100%" stop-color="#1cb8db"/>
-          </linearGradient>
-        </defs>
-        <!-- Outer hexagon -->
-        <polygon class="hex-outer" points="100,10 178,46 178,118 100,154 22,118 22,46" fill="url(#grad-brand)" opacity=".9"/>
-        <!-- Mid hexagon (offset) -->
-        <polygon class="hex-mid" points="100,36 156,62 156,114 100,140 44,114 44,62" fill="#0a0a0f" stroke="url(#grad-brand)" stroke-width="4"/>
-        <!-- Inner hexagon -->
-        <polygon class="hex-inner" points="100,60 132,78 132,110 100,128 68,110 68,78" fill="url(#grad-brand)" opacity=".85"/>
-      </svg>
+<main>
+
+  <section class="hero">
+    <div class="wordmark"><em>kcolb</em>chain</div>
+    <p>An open visual identity. One typeface, three colors, a spacing scale. The wordmark is the mark — <span class="fg">kcolb</span> reverses <span class="fg">blok</span>; the rest is restraint.</p>
+  </section>
+
+  <section>
+    <h2>type</h2>
+    <p>JetBrains Mono. One family, three weights, six sizes. Falls back to <code>ui-monospace</code> so the page renders before any font loads.</p>
+    <div style="margin-top: var(--s-5)">
+      <div class="type-row"><div class="label">44 / 700</div><div class="sample s-t6">kcolbchain</div></div>
+      <div class="type-row"><div class="label">28 / 500</div><div class="sample s-t5">section heading</div></div>
+      <div class="type-row"><div class="label">20 / 500</div><div class="sample s-t4">subhead</div></div>
+      <div class="type-row"><div class="label">15 / 400</div><div class="sample s-t3">emphasis &amp; lead</div></div>
+      <div class="type-row"><div class="label">13 / 400</div><div class="sample s-t2">body — the default</div></div>
+      <div class="type-row"><div class="label">11 / 500</div><div class="sample s-t1">LABELS, CAPTIONS, META</div></div>
     </div>
+  </section>
 
-    <div class="hero-wordplay" id="wordplay">kcolbchain</div>
-    <div class="hero-wordplay-sub">open brand kit &amp; playground</div>
-    <p class="subtitle" style="margin-top:24px">Click the logo. Move your mouse. Explore how the kcolbchain brand comes alive across our projects.</p>
-  </div>
-</section>
-
-<!-- ===== 2. Animation showcase ===== -->
-<section class="section" id="animations">
-  <div class="section-inner">
-    <h2>Logo Animations</h2>
-    <p class="subtitle">Six animation modes — each usable in project headers, loading states, and presentations.</p>
-
-    <div class="showcase-grid">
-      <div class="showcase-card">
-        <h3>spin</h3>
-        <p>Counter-rotating layers</p>
-        <svg class="showcase-logo anim-spin" viewBox="0 0 200 200"><use href="#hex-set"/></svg>
+  <section>
+    <h2>color</h2>
+    <p>Three values carry the system. The mark appears <span class="fg">once</span> per view — anything more is noise.</p>
+    <div style="margin-top: var(--s-5)">
+      <div class="color-row">
+        <div class="chip" style="background:#0b0b0d"></div>
+        <div class="name">bg</div>
+        <div class="hex" data-hex="#0b0b0d">#0b0b0d</div>
       </div>
-      <div class="showcase-card">
-        <h3>breathe</h3>
-        <p>Staggered scale pulse</p>
-        <svg class="showcase-logo anim-breathe" viewBox="0 0 200 200"><use href="#hex-set"/></svg>
+      <div class="color-row">
+        <div class="chip" style="background:#131316"></div>
+        <div class="name">bg-elev</div>
+        <div class="hex" data-hex="#131316">#131316</div>
       </div>
-      <div class="showcase-card">
-        <h3>glitch</h3>
-        <p>Digital interference</p>
-        <svg class="showcase-logo anim-glitch" viewBox="0 0 200 200"><use href="#hex-set"/></svg>
+      <div class="color-row">
+        <div class="chip" style="background:#1f1f24"></div>
+        <div class="name">line</div>
+        <div class="hex" data-hex="#1f1f24">#1f1f24</div>
       </div>
-      <div class="showcase-card">
-        <h3>orbit</h3>
-        <p>Floating separation</p>
-        <svg class="showcase-logo anim-orbit" viewBox="0 0 200 200"><use href="#hex-set"/></svg>
+      <div class="color-row">
+        <div class="chip" style="background:#ededf0"></div>
+        <div class="name">fg</div>
+        <div class="hex" data-hex="#ededf0">#ededf0</div>
       </div>
-      <div class="showcase-card">
-        <h3>morph</h3>
-        <p>Elastic deformation</p>
-        <svg class="showcase-logo anim-morph" viewBox="0 0 200 200"><use href="#hex-set"/></svg>
+      <div class="color-row">
+        <div class="chip" style="background:#8a8a92"></div>
+        <div class="name">fg-muted</div>
+        <div class="hex" data-hex="#8a8a92">#8a8a92</div>
       </div>
-      <div class="showcase-card">
-        <h3>neon</h3>
-        <p>Cyan glow flicker</p>
-        <svg class="showcase-logo anim-neon" viewBox="0 0 200 200"><use href="#hex-set"/></svg>
+      <div class="color-row">
+        <div class="chip" style="background:#5a5a62"></div>
+        <div class="name">fg-faint</div>
+        <div class="hex" data-hex="#5a5a62">#5a5a62</div>
+      </div>
+      <div class="color-row">
+        <div class="chip" style="background:#f5e03a"></div>
+        <div class="name">mark</div>
+        <div class="hex" data-hex="#f5e03a">#f5e03a</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== 3. Interactive canvas ===== -->
-<section class="canvas-section" id="canvas-play">
-  <canvas id="interactive-canvas"></canvas>
-  <span class="canvas-hint">move mouse to spawn hexagons &#183; click for burst</span>
-</section>
-
-<!-- ===== 4. Color palette ===== -->
-<section class="section" id="palette">
-  <div class="section-inner">
-    <h2>Colour Palette</h2>
-    <p class="subtitle">Brand yellow for identity, cyan for interaction, dark for depth. Click to copy.</p>
-
-    <div class="palette-row">
-      <div>
-        <div class="swatch" style="background:#f5e03a" data-hex="#f5e03a"></div>
-        <div class="swatch-label">brand<br>#f5e03a</div>
-      </div>
-      <div>
-        <div class="swatch" style="background:#e8d030" data-hex="#e8d030"></div>
-        <div class="swatch-label">brand-hover<br>#e8d030</div>
-      </div>
-      <div>
-        <div class="swatch" style="background:#2fd4ff" data-hex="#2fd4ff"></div>
-        <div class="swatch-label">accent<br>#2fd4ff</div>
-      </div>
-      <div>
-        <div class="swatch" style="background:#1cb8db" data-hex="#1cb8db"></div>
-        <div class="swatch-label">accent-dim<br>#1cb8db</div>
-      </div>
-      <div>
-        <div class="swatch" style="background:#0a0a0f;border-color:#2e2e3e" data-hex="#0a0a0f"></div>
-        <div class="swatch-label">bg<br>#0a0a0f</div>
-      </div>
-      <div>
-        <div class="swatch" style="background:#12121a" data-hex="#12121a"></div>
-        <div class="swatch-label">bg-card<br>#12121a</div>
-      </div>
-      <div>
-        <div class="swatch" style="background:#e0e0e8" data-hex="#e0e0e8"></div>
-        <div class="swatch-label">text<br>#e0e0e8</div>
-      </div>
-      <div>
-        <div class="swatch" style="background:#8888a0" data-hex="#8888a0"></div>
-        <div class="swatch-label">text-dim<br>#8888a0</div>
-      </div>
+  <section>
+    <h2>space</h2>
+    <p>Space is the brand. The scale roughly doubles — use one step at a time, never invent between.</p>
+    <div style="margin-top: var(--s-5)">
+      <div class="space-row"><div class="token">--s-1</div><div class="px">4px</div><div class="bar" style="width:4px"></div></div>
+      <div class="space-row"><div class="token">--s-2</div><div class="px">8px</div><div class="bar" style="width:8px"></div></div>
+      <div class="space-row"><div class="token">--s-3</div><div class="px">16px</div><div class="bar" style="width:16px"></div></div>
+      <div class="space-row"><div class="token">--s-4</div><div class="px">24px</div><div class="bar" style="width:24px"></div></div>
+      <div class="space-row"><div class="token">--s-5</div><div class="px">40px</div><div class="bar" style="width:40px"></div></div>
+      <div class="space-row"><div class="token">--s-6</div><div class="px">64px</div><div class="bar" style="width:64px"></div></div>
+      <div class="space-row"><div class="token">--s-7</div><div class="px">96px</div><div class="bar" style="width:96px"></div></div>
+      <div class="space-row"><div class="token">--s-8</div><div class="px">160px</div><div class="bar" style="width:160px"></div></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== 5. Project identity system ===== -->
-<section class="section" id="projects">
-  <div class="section-inner">
-    <h2>Project Identity</h2>
-    <p class="subtitle">Each project inherits the hexagon mark with its own colour accent and motion style.</p>
+  <section>
+    <h2>use</h2>
+    <p>Vendor <code>tokens.css</code> or link it from the CDN. Read the rest of the system from this page.</p>
+<pre><code>&lt;link rel="stylesheet"
+      href="https://kcolbchain.github.io/brand/tokens.css"&gt;</code></pre>
+  </section>
 
-    <div class="project-id-grid" id="project-grid">
-      <!-- Filled by JS -->
-    </div>
-  </div>
-</section>
+  <section>
+    <h2>principles</h2>
+    <p><span class="fg">Monotype.</span> One typeface across everything. No exceptions for headings, no sans-for-body. The grid the type sits on is the visual system.</p>
+    <p><span class="fg">Anonymous.</span> No mascot, no character, no mark beyond the wordmark. The work speaks; the brand does not announce itself.</p>
+    <p><span class="fg">Open.</span> Tokens are public. Copy what you need; attribute nothing.</p>
+    <p><span class="fg">Space.</span> If a layout feels finished, remove something. Add space first, type second, color last.</p>
+    <p><span class="fg">Time.</span> No animation that costs the visitor a frame. No autoplay. No page that does not render before a font loads.</p>
+  </section>
 
-<footer class="pg-footer">
-  <a href="https://kcolbchain.com" rel="noopener noreferrer">kcolbchain.com</a> &middot; <a href="https://docs.kcolbchain.com" target="_blank" rel="noopener noreferrer">docs</a> &middot; <a href="https://github.com/kcolbchain" target="_blank" rel="noopener noreferrer">github</a>
+</main>
+
+<footer>
+  <div>MIT &middot; <a href="https://github.com/kcolbchain/brand">source</a></div>
+  <nav>
+    <a href="https://kcolbchain.com">site</a>
+    <a href="https://docs.kcolbchain.com">docs</a>
+    <a href="https://github.com/kcolbchain">github</a>
+  </nav>
 </footer>
 
-<!-- Reusable SVG symbol -->
-<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <g id="hex-set">
-      <polygon class="hex-outer" points="100,10 178,46 178,118 100,154 22,118 22,46" fill="#f5e03a" opacity=".9"/>
-      <polygon class="hex-mid" points="100,36 156,62 156,114 100,140 44,114 44,62" fill="#0a0a0f" stroke="#f5e03a" stroke-width="4"/>
-      <polygon class="hex-inner" points="100,60 132,78 132,110 100,128 68,110 68,78" fill="#f5e03a" opacity=".85"/>
-    </g>
-  </defs>
-</svg>
-
 <script>
-/* =========================================================
-   kcolbchain brand kit — self-contained demo (MIT)
-   ========================================================= */
-
-// ---- Config ----
-var BRAND = '#f5e03a';
-var ACCENT = '#2fd4ff';
-var BG = '#0a0a0f';
-var PROJECTS = [
-  { name: 'meridian',           desc: 'Market-making agents',   color: '#f5e03a', anim: 'spin' },
-  { name: 'monsoon',            desc: 'Airdrop farming',        color: '#2fd4ff', anim: 'breathe' },
-  { name: 'switchboard',        desc: 'Agent infrastructure',   color: '#a78bfa', anim: 'orbit' },
-  { name: 'erc721-ai',          desc: 'AI model tokens',        color: '#34d399', anim: 'morph' },
-  { name: 'stablecoin-toolkit', desc: 'Stablecoin issuance',    color: '#f97316', anim: 'breathe' },
-  { name: 'depeg-monitor',      desc: 'Depeg detection',        color: '#fb7185', anim: 'glitch' },
-  { name: 'quoter',             desc: 'Quoting framework',      color: '#facc15', anim: 'spin' },
-  { name: 'gas-oracle',         desc: 'L2 gas prediction',      color: '#38bdf8', anim: 'neon' },
-  { name: 'rwa-toolkit',        desc: 'RWA tokenisation',       color: '#c084fc', anim: 'orbit' },
-  { name: 'audit-checklist',    desc: 'Security templates',     color: '#f43f5e', anim: 'glitch' },
-  { name: 'research',           desc: 'Published briefs',       color: '#94a3b8', anim: 'breathe' }
-];
-
-// ============== 1. Background particle field ==============
-(function () {
-  var c = document.getElementById('particle-canvas');
-  var ctx = c.getContext('2d');
-  var W, H;
-  var particles = [];
-  var mouse = { x: -1000, y: -1000 };
-  var MAX = 80;
-
-  function resize() {
-    W = c.width = window.innerWidth;
-    H = c.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function Particle() {
-    this.x = Math.random() * W;
-    this.y = Math.random() * H;
-    this.vx = (Math.random() - .5) * .3;
-    this.vy = (Math.random() - .5) * .3;
-    this.r = Math.random() * 1.5 + .5;
-    this.color = Math.random() > .7 ? ACCENT : BRAND;
-    this.alpha = Math.random() * .4 + .1;
-  }
-
-  for (var i = 0; i < MAX; i++) particles.push(new Particle());
-
-  document.addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; });
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-
-      // Mouse repulsion
-      var dx = p.x - mouse.x;
-      var dy = p.y - mouse.y;
-      var dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 150) {
-        var force = (150 - dist) / 150 * .02;
-        p.vx += dx / dist * force;
-        p.vy += dy / dist * force;
-      }
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = p.alpha;
-      ctx.fill();
-
-      // Connect nearby
-      for (var j = i + 1; j < particles.length; j++) {
-        var q = particles[j];
-        var ddx = p.x - q.x;
-        var ddy = p.y - q.y;
-        var d = ddx * ddx + ddy * ddy;
-        if (d < 18000) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = BRAND;
-          ctx.globalAlpha = (1 - d / 18000) * .08;
-          ctx.stroke();
-        }
-      }
-    }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-// ============== 2. Wordplay animation ==============
-(function () {
-  var el = document.getElementById('wordplay');
-  var word = 'kcolbchain';
-  var alt  = 'blockchain';
-  var chars = word.split('');
-  el.textContent = '';
-
-  var spans = chars.map(function (ch) {
-    var s = document.createElement('span');
-    s.className = 'wp-char';
-    s.textContent = ch;
-    el.appendChild(s);
-    return s;
-  });
-
-  var showing = 'original';
-
-  function flipTo(target) {
-    var arr = target.split('');
-    spans.forEach(function (s, i) {
-      setTimeout(function () {
-        s.classList.add('flip');
-        setTimeout(function () {
-          s.textContent = arr[i];
-          s.classList.remove('flip');
-        }, 220);
-      }, i * 60);
-    });
-  }
-
-  function cycle() {
-    if (showing === 'original') { flipTo(alt); showing = 'reversed'; }
-    else { flipTo(word); showing = 'original'; }
-  }
-
-  setTimeout(function () { cycle(); setInterval(cycle, 4000); }, 2500);
-})();
-
-// ============== 3. Hero logo click burst ==============
-(function () {
-  var logo = document.getElementById('hero-logo');
-  logo.addEventListener('click', function () {
-    logo.style.transition = 'none';
-    logo.style.transform = 'scale(1.15) rotate(8deg)';
-    setTimeout(function () {
-      logo.style.transition = 'transform .6s cubic-bezier(.25,.46,.45,.94)';
-      logo.style.transform = 'scale(1) rotate(0deg)';
-    }, 150);
-  });
-})();
-
-// ============== 4. Interactive canvas ==============
-(function () {
-  var c = document.getElementById('interactive-canvas');
-  var ctx = c.getContext('2d');
-  var W, H;
-  var hexagons = [];
-  var mouse = { x: 0, y: 0, down: false };
-
-  function resize() {
-    var rect = c.parentElement.getBoundingClientRect();
-    W = c.width = rect.width;
-    H = c.height = 500;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function hexPath(ctx, cx, cy, r, rot) {
-    ctx.beginPath();
-    for (var i = 0; i < 6; i++) {
-      var a = Math.PI / 3 * i + rot;
-      var method = i === 0 ? 'moveTo' : 'lineTo';
-      ctx[method](cx + r * Math.cos(a), cy + r * Math.sin(a));
-    }
-    ctx.closePath();
-  }
-
-  function Hex(x, y, burst) {
-    this.x = x;
-    this.y = y;
-    this.r = burst ? Math.random() * 30 + 15 : Math.random() * 18 + 6;
-    this.rot = Math.random() * Math.PI;
-    this.rotV = (Math.random() - .5) * .03;
-    this.vx = burst ? (Math.random() - .5) * 6 : (Math.random() - .5) * .5;
-    this.vy = burst ? (Math.random() - .5) * 6 : -Math.random() * .8 - .2;
-    this.life = 1;
-    this.decay = burst ? .015 : .005;
-    this.color = Math.random() > .5 ? BRAND : ACCENT;
-    this.filled = Math.random() > .4;
-  }
-
-  c.addEventListener('mousemove', function (e) {
-    var rect = c.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-    if (hexagons.length < 400) hexagons.push(new Hex(mouse.x, mouse.y, false));
-  });
-
-  c.addEventListener('click', function () {
-    for (var i = 0; i < 24; i++) hexagons.push(new Hex(mouse.x, mouse.y, true));
-  });
-
-  function draw() {
-    ctx.fillStyle = BG;
-    ctx.fillRect(0, 0, W, H);
-
-    for (var i = hexagons.length - 1; i >= 0; i--) {
-      var h = hexagons[i];
-      h.x += h.vx;
-      h.y += h.vy;
-      h.rot += h.rotV;
-      h.life -= h.decay;
-      if (h.life <= 0) { hexagons.splice(i, 1); continue; }
-
-      ctx.globalAlpha = h.life * .7;
-      hexPath(ctx, h.x, h.y, h.r, h.rot);
-      if (h.filled) {
-        ctx.fillStyle = h.color;
-        ctx.fill();
-      } else {
-        ctx.strokeStyle = h.color;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
-    }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-// ============== 5. Project identity cards ==============
-(function () {
-  var grid = document.getElementById('project-grid');
-
-  function makeSVG(color, animClass) {
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('viewBox', '0 0 200 200');
-    svg.setAttribute('class', 'project-id-logo ' + animClass);
-
-    var outer = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    outer.setAttribute('class', 'hex-outer');
-    outer.setAttribute('points', '100,10 178,46 178,118 100,154 22,118 22,46');
-    outer.setAttribute('fill', color);
-    outer.setAttribute('opacity', '.9');
-
-    var mid = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    mid.setAttribute('class', 'hex-mid');
-    mid.setAttribute('points', '100,36 156,62 156,114 100,140 44,114 44,62');
-    mid.setAttribute('fill', BG);
-    mid.setAttribute('stroke', color);
-    mid.setAttribute('stroke-width', '4');
-
-    var inner = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    inner.setAttribute('class', 'hex-inner');
-    inner.setAttribute('points', '100,60 132,78 132,110 100,128 68,110 68,78');
-    inner.setAttribute('fill', color);
-    inner.setAttribute('opacity', '.85');
-
-    svg.appendChild(outer);
-    svg.appendChild(mid);
-    svg.appendChild(inner);
-    return svg;
-  }
-
-  PROJECTS.forEach(function (p) {
-    var card = document.createElement('a');
-    card.className = 'project-id-card';
-    card.href = 'https://docs.kcolbchain.com/' + p.name + '/';
-    card.target = '_blank';
-    card.setAttribute('rel', 'noopener noreferrer');
-    card.style.setProperty('--card-accent', p.color);
-    card.style.setProperty('--card-glow', p.color + '1a');
-
-    var svg = makeSVG(p.color, 'anim-' + p.anim);
-    card.appendChild(svg);
-
-    var name = document.createElement('div');
-    name.className = 'project-id-name';
-    name.textContent = p.name;
-    card.appendChild(name);
-
-    var desc = document.createElement('div');
-    desc.className = 'project-id-desc';
-    desc.textContent = p.desc;
-    card.appendChild(desc);
-
-    grid.appendChild(card);
-  });
-})();
-
-// ============== 6. Copy swatch hex on click ==============
-document.querySelectorAll('.swatch').forEach(function (el) {
-  el.addEventListener('click', function () {
-    var hex = el.getAttribute('data-hex');
-    navigator.clipboard.writeText(hex).then(function () {
-      el.style.boxShadow = '0 0 20px ' + hex;
-      setTimeout(function () { el.style.boxShadow = ''; }, 600);
+  // Click a hex value to copy it. Nothing else moves.
+  document.querySelectorAll('.hex').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var v = el.getAttribute('data-hex');
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(v).then(function () {
+        var prev = el.style.color;
+        el.style.color = 'var(--mark)';
+        setTimeout(function () { el.style.color = prev; }, 500);
+      });
     });
   });
-});
 </script>
+
 </body>
 </html>
