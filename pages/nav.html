@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — nav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    /* The demo nav lives inside a card so it doesn't compete with the real
+     * page nav at the top of this file. */
+    .demo {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .demo .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--s-3) var(--s-4);
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      font-size: var(--t-1);
+    }
+    .demo .topbar .wm { color: var(--fg); font-weight: 500; }
+    .demo .topbar .wm em { color: var(--mark); font-style: normal; font-weight: 700; }
+    .demo .topbar nav { display: flex; gap: var(--s-3); }
+    .demo .topbar nav a { color: var(--fg-faint); text-decoration: none; border-bottom: none; }
+    .demo .topbar nav a:hover, .demo .topbar nav a.here { color: var(--fg); }
+    .demo .body {
+      padding: var(--s-4);
+      background: var(--bg-elev);
+      color: var(--fg-muted);
+      font-size: var(--t-2);
+    }
+    .demo .foot {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: var(--s-3) var(--s-4);
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+      font-size: var(--t-1);
+      color: var(--fg-faint);
+    }
+    .demo .foot nav { display: flex; gap: var(--s-3); }
+    .demo .foot a { color: var(--fg-faint); text-decoration: none; border-bottom: none; }
+    .demo .foot a:hover { color: var(--fg); }
+
+    .crumbs {
+      font-size: var(--t-1);
+      color: var(--fg-faint);
+      font-family: var(--font);
+    }
+    .crumbs a { color: var(--fg-muted); text-decoration: none; border-bottom: none; }
+    .crumbs a:hover { color: var(--fg); }
+    .crumbs .sep { color: var(--fg-faint); margin: 0 6px; }
+    .crumbs .here { color: var(--fg); }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html" class="here">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>nav</h1>
+  <p class="lead">Headers and footers are the same shape — wordmark on the left, links on the right, one hairline border. The wordmark on every kcolbchain page is the same five-character mark; never replace it with a custom logo per product.</p>
+
+  <h2>header</h2>
+  <div class="snippet">
+    <div class="render">
+      <div class="demo">
+        <div class="topbar">
+          <a class="wm" href="#"><em>kcolb</em>chain &nbsp;/&nbsp; depeg-monitor</a>
+          <nav>
+            <a href="#" class="here">dashboard</a>
+            <a href="#">history</a>
+            <a href="#">docs</a>
+            <a href="#">source</a>
+          </nav>
+        </div>
+        <div class="body">page body sits here.</div>
+      </div>
+    </div>
+<pre><code>&lt;div class="topbar"&gt;
+  &lt;a class="wm" href="#"&gt;
+    &lt;em&gt;kcolb&lt;/em&gt;chain &amp;nbsp;/&amp;nbsp; depeg-monitor
+  &lt;/a&gt;
+  &lt;nav&gt;
+    &lt;a href="#" class="here"&gt;dashboard&lt;/a&gt;
+    &lt;a href="#"&gt;history&lt;/a&gt;
+    &lt;a href="#"&gt;docs&lt;/a&gt;
+    &lt;a href="#"&gt;source&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>footer</h2>
+  <div class="snippet">
+    <div class="render">
+      <div class="demo">
+        <div class="body">page body sits here.</div>
+        <div class="foot">
+          <div>MIT · <a href="#">source</a></div>
+          <nav>
+            <a href="#">site</a>
+            <a href="#">docs</a>
+            <a href="#">github</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+<pre><code>&lt;div class="foot"&gt;
+  &lt;div&gt;MIT &middot; &lt;a href="#"&gt;source&lt;/a&gt;&lt;/div&gt;
+  &lt;nav&gt;
+    &lt;a href="#"&gt;site&lt;/a&gt;
+    &lt;a href="#"&gt;docs&lt;/a&gt;
+    &lt;a href="#"&gt;github&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>breadcrumb</h2>
+  <p>A breadcrumb belongs at the top of a deep view; if the page is one level below a list, you can probably drop it. Use a forward slash as the separator — it reads as a path and pairs with the monospace.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="crumbs">
+        <a href="#">kcolbchain</a><span class="sep">/</span>
+        <a href="#">depeg-monitor</a><span class="sep">/</span>
+        <a href="#">history</a><span class="sep">/</span>
+        <span class="here">USDC</span>
+      </div>
+    </div>
+<pre><code>&lt;div class="crumbs"&gt;
+  &lt;a href="#"&gt;kcolbchain&lt;/a&gt;&lt;span class="sep"&gt;/&lt;/span&gt;
+  &lt;a href="#"&gt;depeg-monitor&lt;/a&gt;&lt;span class="sep"&gt;/&lt;/span&gt;
+  &lt;a href="#"&gt;history&lt;/a&gt;&lt;span class="sep"&gt;/&lt;/span&gt;
+  &lt;span class="here"&gt;USDC&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>css</h2>
+<pre><code>.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s-3) var(--s-4);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--t-1);
+}
+.topbar .wm { color: var(--fg); font-weight: 500; }
+.topbar .wm em { color: var(--mark); font-style: normal; font-weight: 700; }
+.topbar nav { display: flex; gap: var(--s-3); }
+.topbar nav a { color: var(--fg-faint); text-decoration: none; }
+.topbar nav a:hover, .topbar nav a.here { color: var(--fg); }
+
+.foot {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: var(--s-3) var(--s-4);
+  border-top: 1px solid var(--line);
+  font-size: var(--t-1); color: var(--fg-faint);
+}
+
+.crumbs { font-size: var(--t-1); color: var(--fg-faint); font-family: var(--font); }
+.crumbs a { color: var(--fg-muted); text-decoration: none; }
+.crumbs .sep { color: var(--fg-faint); margin: 0 6px; }
+.crumbs .here { color: var(--fg); }</code></pre>
+
+</main>
+
+</body>
+</html>

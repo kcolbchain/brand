@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — alerts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    .log {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-3) var(--s-4);
+    }
+    .log h3 {
+      margin: 0 0 var(--s-2);
+      font-size: var(--t-1);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--fg-faint);
+    }
+    .log ul { list-style: none; padding: 0; margin: 0; font-family: var(--font); font-size: var(--t-1); }
+    .log li {
+      padding: 6px 0;
+      border-top: 1px solid var(--line);
+      color: var(--fg-muted);
+      display: grid;
+      grid-template-columns: 56px 84px 1fr;
+      gap: var(--s-2);
+      align-items: baseline;
+    }
+    .log li:first-child { border-top: none; }
+    .log li .lvl       { color: var(--fg-faint); }
+    .log li.ok   .lvl  { color: var(--ok); }
+    .log li.warn .lvl  { color: var(--warn); }
+    .log li.hot  .lvl  { color: var(--hot); }
+    .log li .ts        { color: var(--fg-faint); font-variant-numeric: tabular-nums; }
+    .log li .msg       { color: var(--fg); }
+
+    .banner {
+      display: flex; gap: var(--s-3); align-items: flex-start;
+      padding: var(--s-3) var(--s-4);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-elev);
+    }
+    .banner .mark {
+      flex: 0 0 4px;
+      align-self: stretch;
+      background: var(--fg-muted);
+      border-radius: 2px;
+    }
+    .banner.ok   .mark { background: var(--ok); }
+    .banner.warn .mark { background: var(--warn); }
+    .banner.hot  .mark { background: var(--hot); }
+    .banner .body { font-family: var(--font); font-size: var(--t-2); color: var(--fg); }
+    .banner .body .lead { color: var(--fg); margin-bottom: 2px; }
+    .banner .body .sub  { color: var(--fg-muted); font-size: var(--t-1); }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html" class="here">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>alerts</h1>
+  <p class="lead">Two shapes. A log is a dense stream — many short messages, one severity character per line. A banner is one event you want a reader to handle. Use the log for ambient state; reserve the banner for something the user must read.</p>
+
+  <h2>log</h2>
+  <div class="snippet">
+    <div class="render">
+      <div class="log">
+        <h3>alert log</h3>
+        <ul>
+          <li class="hot"><span class="lvl">hot</span><span class="ts">14:21:03</span><span class="msg">USDT depeg: -198.0 bps via coinbase</span></li>
+          <li class="warn"><span class="lvl">warn</span><span class="ts">14:20:33</span><span class="msg">USDC drifting: -59.0 bps via binance</span></li>
+          <li class="ok"><span class="lvl">ok</span><span class="ts">14:20:03</span><span class="msg">DAI re-pegged: -4.0 bps via curve</span></li>
+          <li><span class="lvl">boot</span><span class="ts">14:19:00</span><span class="msg">monitor started — interval 30s</span></li>
+        </ul>
+      </div>
+    </div>
+<pre><code>&lt;div class="log"&gt;
+  &lt;h3&gt;alert log&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li class="hot"&gt;
+      &lt;span class="lvl"&gt;hot&lt;/span&gt;
+      &lt;span class="ts"&gt;14:21:03&lt;/span&gt;
+      &lt;span class="msg"&gt;USDT depeg: -198.0 bps via coinbase&lt;/span&gt;
+    &lt;/li&gt;
+    ...
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>banner</h2>
+  <p>The banner is the loud cousin. A 4px colored bar on the left, content on the right. Place at the top of a view or above the affected card; never two at once.</p>
+  <div class="snippet">
+    <div class="render flow">
+      <div class="banner hot">
+        <div class="mark"></div>
+        <div class="body">
+          <div class="lead">USDT depegged on coinbase — -198.0 bps</div>
+          <div class="sub">first observed 14:21:03 · ack with <code>depeg-monitor ack --coin USDT</code></div>
+        </div>
+      </div>
+      <div class="banner warn">
+        <div class="mark"></div>
+        <div class="body">
+          <div class="lead">USDC drifting — -59.0 bps</div>
+          <div class="sub">below warn threshold (50 bps) on binance · cleared at +120s</div>
+        </div>
+      </div>
+    </div>
+<pre><code>&lt;div class="banner hot"&gt;
+  &lt;div class="mark"&gt;&lt;/div&gt;
+  &lt;div class="body"&gt;
+    &lt;div class="lead"&gt;USDT depegged on coinbase — -198.0 bps&lt;/div&gt;
+    &lt;div class="sub"&gt;first observed 14:21:03&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>css</h2>
+<pre><code>.log { background: var(--bg-elev); border: 1px solid var(--line);
+       border-radius: var(--radius); padding: var(--s-3) var(--s-4); }
+.log h3 { font-size: var(--t-1); text-transform: uppercase;
+          letter-spacing: 0.12em; color: var(--fg-faint); }
+.log ul { list-style: none; padding: 0; margin: 0;
+          font-family: var(--font); font-size: var(--t-1); }
+.log li { display: grid; grid-template-columns: 56px 84px 1fr;
+          gap: var(--s-2); padding: 6px 0;
+          border-top: 1px solid var(--line); color: var(--fg-muted); }
+.log li.ok   .lvl { color: var(--ok); }
+.log li.warn .lvl { color: var(--warn); }
+.log li.hot  .lvl { color: var(--hot); }
+
+.banner { display: flex; gap: var(--s-3); padding: var(--s-3) var(--s-4);
+          border: 1px solid var(--line); border-radius: var(--radius);
+          background: var(--bg-elev); }
+.banner .mark { flex: 0 0 4px; align-self: stretch; background: var(--fg-muted); }
+.banner.ok   .mark { background: var(--ok); }
+.banner.warn .mark { background: var(--warn); }
+.banner.hot  .mark { background: var(--hot); }</code></pre>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — charts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    /* All charts here are plain SVG. No library.
+     * Coordinates: viewBox = "0 0 W H"; path uses M/L commands. */
+
+    .chart {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-3) var(--s-4) var(--s-4);
+    }
+    .chart .chart-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: var(--s-3);
+    }
+    .chart h3 {
+      margin: 0;
+      font-size: var(--t-1);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--fg-faint);
+    }
+    .chart .legend {
+      display: flex; gap: var(--s-3);
+      font-size: var(--t-1);
+      color: var(--fg-muted);
+      font-family: var(--font);
+    }
+    .chart .legend .swatch {
+      display: inline-block;
+      width: 10px; height: 2px;
+      vertical-align: 3px;
+      margin-right: 6px;
+      background: currentColor;
+    }
+    .chart .legend .usdc { color: #6aa3e0; }   /* desaturated USDC blue */
+    .chart .legend .usdt { color: #6ec07a; }   /* desaturated USDT green */
+    .chart .legend .dai  { color: var(--mark); }
+
+    svg.spark {
+      display: block;
+      width: 100%;
+      height: 48px;
+    }
+    svg.ts {
+      display: block;
+      width: 100%;
+      height: 220px;
+    }
+    /* Guides — peg at 0, warn band, critical band */
+    svg .peg  { stroke: var(--line); stroke-dasharray: 3 3; }
+    svg .warn { stroke: var(--warn); stroke-dasharray: 2 4; opacity: 0.45; }
+    svg .hot  { stroke: var(--hot);  stroke-dasharray: 2 4; opacity: 0.45; }
+    svg .grid { stroke: var(--line); opacity: 0.5; }
+    svg .axis-label {
+      font-family: var(--font);
+      font-size: 9px;
+      fill: var(--fg-faint);
+    }
+    /* Series colors — desaturated to match the brand mood */
+    svg .s-usdc { stroke: #6aa3e0; }
+    svg .s-usdt { stroke: #6ec07a; }
+    svg .s-dai  { stroke: var(--mark); }
+    svg .series { fill: none; stroke-width: 1.5; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html" class="here">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>charts</h1>
+  <p class="lead">Plain SVG — no library, no canvas. A sparkline lives inside a card; a time series gets its own. Both use the same coordinate convention so the markup is identical except for height. Guide lines (peg, warn, critical) come from the token palette, not the chart library.</p>
+
+  <h2>sparkline</h2>
+  <p>Use inside a card to show the last <em>N</em> points of a single series. No axes, no legend — the surrounding card carries the label.</p>
+  <div class="snippet">
+    <div class="render">
+      <svg class="spark" viewBox="0 0 100 48" preserveAspectRatio="none">
+        <line class="peg"  x1="0" y1="24" x2="100" y2="24" />
+        <line class="warn" x1="0" y1="14" x2="100" y2="14" />
+        <line class="warn" x1="0" y1="34" x2="100" y2="34" />
+        <line class="hot"  x1="0" y1="6"  x2="100" y2="6"  />
+        <line class="hot"  x1="0" y1="42" x2="100" y2="42" />
+        <path class="series s-usdc"
+              d="M 0 24 L 10 23 L 20 25 L 30 22 L 40 27 L 50 24 L 60 22 L 70 28 L 80 21 L 90 25 L 100 24" />
+      </svg>
+    </div>
+<pre><code>&lt;svg class="spark" viewBox="0 0 100 48" preserveAspectRatio="none"&gt;
+  &lt;line class="peg"  x1="0" y1="24" x2="100" y2="24" /&gt;
+  &lt;line class="warn" x1="0" y1="14" x2="100" y2="14" /&gt;
+  &lt;line class="warn" x1="0" y1="34" x2="100" y2="34" /&gt;
+  &lt;line class="hot"  x1="0" y1="6"  x2="100" y2="6"  /&gt;
+  &lt;line class="hot"  x1="0" y1="42" x2="100" y2="42" /&gt;
+  &lt;path class="series s-usdc" d="M 0 24 L 10 23 L 20 25 …" /&gt;
+&lt;/svg&gt;</code></pre>
+  </div>
+
+  <h2>time series</h2>
+  <p>The headline chart of a monitoring dashboard. Y-axis is bps deviation from peg, centred on zero so positive and negative drift read the same. Three series at most — one per coin. More than three and the eye loses them; switch to a small-multiples grid of sparklines instead.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="chart">
+        <div class="chart-head">
+          <h3>peg deviation · last 60 ticks</h3>
+          <div class="legend">
+            <span class="usdc"><span class="swatch"></span>USDC</span>
+            <span class="usdt"><span class="swatch"></span>USDT</span>
+            <span class="dai"><span class="swatch"></span>DAI</span>
+          </div>
+        </div>
+        <svg class="ts" viewBox="0 0 800 220" preserveAspectRatio="none">
+          <!-- horizontal guides: peg=110, ±warn=80/140, ±crit=50/170 -->
+          <line class="hot"  x1="0" y1="50"  x2="800" y2="50"  />
+          <line class="warn" x1="0" y1="80"  x2="800" y2="80"  />
+          <line class="peg"  x1="0" y1="110" x2="800" y2="110" />
+          <line class="warn" x1="0" y1="140" x2="800" y2="140" />
+          <line class="hot"  x1="0" y1="170" x2="800" y2="170" />
+
+          <text class="axis-label" x="6" y="58"  >+100 bps</text>
+          <text class="axis-label" x="6" y="88"  >+50 bps</text>
+          <text class="axis-label" x="6" y="116" >peg</text>
+          <text class="axis-label" x="6" y="146" >-50 bps</text>
+          <text class="axis-label" x="6" y="176" >-100 bps</text>
+
+          <!-- example data — pre-computed M/L for clarity in the snippet -->
+          <path class="series s-usdc"
+                d="M 0 108 L 80 110 L 160 112 L 240 109 L 320 111 L 400 113 L 480 110 L 560 112 L 640 108 L 720 110 L 800 109" />
+          <path class="series s-usdt"
+                d="M 0 116 L 80 120 L 160 128 L 240 134 L 320 142 L 400 156 L 480 168 L 560 162 L 640 150 L 720 132 L 800 122" />
+          <path class="series s-dai"
+                d="M 0 110 L 80 108 L 160 112 L 240 114 L 320 109 L 400 111 L 480 110 L 560 113 L 640 112 L 720 109 L 800 110" />
+        </svg>
+      </div>
+    </div>
+<pre><code>&lt;div class="chart"&gt;
+  &lt;div class="chart-head"&gt;
+    &lt;h3&gt;peg deviation · last 60 ticks&lt;/h3&gt;
+    &lt;div class="legend"&gt;
+      &lt;span class="usdc"&gt;&lt;span class="swatch"&gt;&lt;/span&gt;USDC&lt;/span&gt;
+      &lt;span class="usdt"&gt;&lt;span class="swatch"&gt;&lt;/span&gt;USDT&lt;/span&gt;
+      &lt;span class="dai"&gt;&lt;span class="swatch"&gt;&lt;/span&gt;DAI&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;svg class="ts" viewBox="0 0 800 220" preserveAspectRatio="none"&gt;
+    &lt;line class="peg"  x1="0" y1="110" x2="800" y2="110" /&gt;
+    &lt;line class="warn" x1="0" y1="80"  x2="800" y2="80"  /&gt;
+    &lt;line class="warn" x1="0" y1="140" x2="800" y2="140" /&gt;
+    &lt;line class="hot"  x1="0" y1="50"  x2="800" y2="50"  /&gt;
+    &lt;line class="hot"  x1="0" y1="170" x2="800" y2="170" /&gt;
+    &lt;path class="series s-usdc" d="..." /&gt;
+    &lt;path class="series s-usdt" d="..." /&gt;
+    &lt;path class="series s-dai"  d="..." /&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>plotting in plain JS</h2>
+  <p>To draw a series from data, map each point's bps deviation to a Y coordinate using a fixed visual range. The fixed range keeps every chart comparable across coins and across reloads.</p>
+<pre><code>// y: 0 = top, H = bottom; centre peg at H/2.
+// range = max bps to show on either side (e.g. 200 → ±200 bps fills the chart).
+function ySVG(bps, range, H) {
+  const clamped = Math.max(-range, Math.min(range, bps));
+  return H / 2 - (clamped / range) * (H / 2 - 6); // 6px top/bottom padding
+}
+
+function pathFromSeries(points, peg, range, W, H) {
+  const step = W / Math.max(1, points.length - 1);
+  return points.map((p, i) =&gt; {
+    const bps = ((p.price - peg) / peg) * 10000;
+    const x = (i * step).toFixed(2);
+    const y = ySVG(bps, range, H).toFixed(2);
+    return (i === 0 ? 'M' : 'L') + ' ' + x + ' ' + y;
+  }).join(' ');
+}</code></pre>
+
+  <h2>palette</h2>
+  <p>Series colors are <span class="fg">desaturated</span> versions of the token issuer palette — close enough that an operator recognises USDC/USDT/DAI, muted enough that no line out-shouts the others. The brand mark (yellow) is reserved for DAI when the chart needs a third hue; otherwise the third series falls back to <code class="inline" style="background:var(--bg-elev);border:1px solid var(--line);padding:1px 5px">var(--fg)</code>.</p>
+<pre><code>--s-usdc: #6aa3e0;   /* desaturated USDC blue */
+--s-usdt: #6ec07a;   /* desaturated USDT green */
+--s-dai:  var(--mark);  /* the brand yellow, used here as a data hue */</code></pre>
+
+  <h2>css</h2>
+<pre><code>svg.spark { display: block; width: 100%; height: 48px; }
+svg.ts    { display: block; width: 100%; height: 220px; }
+
+svg .series { fill: none; stroke-width: 1.5; stroke-linejoin: round; }
+svg .peg  { stroke: var(--line); stroke-dasharray: 3 3; }
+svg .warn { stroke: var(--warn); stroke-dasharray: 2 4; opacity: 0.45; }
+svg .hot  { stroke: var(--hot);  stroke-dasharray: 2 4; opacity: 0.45; }
+
+svg .s-usdc { stroke: #6aa3e0; }
+svg .s-usdt { stroke: #6ec07a; }
+svg .s-dai  { stroke: var(--mark); }</code></pre>
+
+</main>
+
+</body>
+</html>

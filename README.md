@@ -4,8 +4,9 @@ Open **design tokens** for the kcolbchain visual identity. One typeface (JetBrai
 
 | Asset | Purpose |
 |--------|---------|
-| `tokens.css` | `:root` variables — type, color, space. Import or copy. |
+| `tokens.css` | `:root` variables — type, color, space, state. Import or copy. |
 | `index.html` | The brand kit itself — type specimen, color, space, principles |
+| `pages/`     | Component snippets — chips, cards, buttons, forms, tables, code, alerts, charts, nav. One file per component; each page is the render + the markup. |
 
 **Live site:** enable GitHub Pages on this repo (root `/`) → `https://kcolbchain.github.io/brand/`
 
@@ -25,7 +26,11 @@ Or vendor the file and override in your own `:root`.
 python3 -m http.server 8000
 ```
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) for the tokens specimen, or [http://127.0.0.1:8000/pages/](http://127.0.0.1:8000/pages/) for the components hub. The `pages/` references are all relative — clone or download the repo and everything renders offline.
+
+## Components
+
+Every page under `pages/` follows the same shape: render on top, snippet underneath. No build, no framework, no install. Open any page in a browser, see the component, view source, copy the HTML + CSS, paste into your project. The tokens are imported once via `<link rel="stylesheet" href="../tokens.css">`; everything else lives inline on the page so a snippet is genuinely self-contained.
 
 ## License
 

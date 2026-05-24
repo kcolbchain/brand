@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    /* Inline code */
+    code.inline {
+      font-family: var(--font);
+      font-size: 0.92em;
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 1px 5px;
+      color: var(--fg);
+    }
+
+    /* Block code */
+    pre.block {
+      margin: 0;
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-3) var(--s-4);
+      font-family: var(--font);
+      font-size: var(--t-1);
+      color: var(--fg);
+      overflow-x: auto;
+    }
+    pre.block .c-comment { color: var(--fg-faint); }
+    pre.block .c-key     { color: var(--mark); }
+    pre.block .c-str     { color: var(--ok); }
+
+    /* Shell prompt */
+    pre.shell {
+      margin: 0;
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-3) var(--s-4);
+      font-family: var(--font);
+      font-size: var(--t-1);
+      color: var(--fg);
+      overflow-x: auto;
+    }
+    pre.shell .prompt { color: var(--fg-faint); user-select: none; }
+    pre.shell .out    { color: var(--fg-muted); }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html" class="here">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>code</h1>
+  <p class="lead">The whole brand is monospace, so code blocks don't need to announce themselves. Border, soft surface, no horizontal scrollbar drama. Highlight three things if you must: comments, keys, strings.</p>
+
+  <h2>inline</h2>
+  <div class="snippet">
+    <div class="render">
+      <p>Set <code class="inline">warn_threshold: 0.005</code> in <code class="inline">config/default.yaml</code> to bump the warn band to 50 bps.</p>
+    </div>
+<pre><code>Set &lt;code class="inline"&gt;warn_threshold: 0.005&lt;/code&gt; in
+&lt;code class="inline"&gt;config/default.yaml&lt;/code&gt; to bump the warn band.</code></pre>
+  </div>
+
+  <h2>block</h2>
+  <p>Plain block — fine for any language. Use the three spans if you want minimal highlighting without a JS highlighter.</p>
+  <div class="snippet">
+    <div class="render">
+<pre class="block"><span class="c-comment"># Watch USDC and USDT, 50bps warn, 100bps critical</span>
+<span class="c-key">stablecoins</span>:
+  - <span class="c-key">symbol</span>: <span class="c-str">USDC</span>
+    <span class="c-key">warn_threshold</span>: 0.005
+    <span class="c-key">critical_threshold</span>: 0.01</pre>
+    </div>
+<pre><code>&lt;pre class="block"&gt;
+&lt;span class="c-comment"&gt;# comment&lt;/span&gt;
+&lt;span class="c-key"&gt;stablecoins&lt;/span&gt;:
+  - &lt;span class="c-key"&gt;symbol&lt;/span&gt;: &lt;span class="c-str"&gt;USDC&lt;/span&gt;
+&lt;/pre&gt;</code></pre>
+  </div>
+
+  <h2>shell</h2>
+  <p>For terminal sessions. The <code class="inline">.prompt</code> span is <code class="inline">user-select: none</code> so a reader copying the command never grabs the dollar sign.</p>
+  <div class="snippet">
+    <div class="render">
+<pre class="shell"><span class="prompt">$ </span>pip install -e .
+<span class="prompt">$ </span>depeg-monitor --config config/default.yaml
+<span class="out">Starting depeg-monitor — checking every 30s
+Watching: USDC, USDT, DAI</span></pre>
+    </div>
+<pre><code>&lt;pre class="shell"&gt;
+&lt;span class="prompt"&gt;$ &lt;/span&gt;pip install -e .
+&lt;span class="prompt"&gt;$ &lt;/span&gt;depeg-monitor --config config/default.yaml
+&lt;span class="out"&gt;Starting depeg-monitor — checking every 30s&lt;/span&gt;
+&lt;/pre&gt;</code></pre>
+  </div>
+
+  <h2>css</h2>
+<pre><code>code.inline {
+  font-family: var(--font); font-size: 0.92em;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 5px; color: var(--fg);
+}
+pre.block, pre.shell {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--s-3) var(--s-4);
+  font-family: var(--font); font-size: var(--t-1);
+  color: var(--fg); overflow-x: auto;
+}
+pre.block .c-comment { color: var(--fg-faint); }
+pre.block .c-key     { color: var(--mark); }
+pre.block .c-str     { color: var(--ok); }
+pre.shell .prompt    { color: var(--fg-faint); user-select: none; }
+pre.shell .out       { color: var(--fg-muted); }</code></pre>
+
+</main>
+
+</body>
+</html>

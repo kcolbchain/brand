@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — buttons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      padding: 8px 14px;
+      font-family: var(--font);
+      font-size: var(--t-2);
+      font-weight: 500;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--bg-elev);
+      color: var(--fg);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .15s ease, color .15s ease, background .15s ease;
+    }
+    .btn:hover { border-color: var(--fg-muted); color: var(--fg); }
+    .btn:focus-visible { outline: 2px solid var(--mark); outline-offset: 2px; }
+
+    .btn.primary {
+      background: var(--mark);
+      color: var(--bg);
+      border-color: var(--mark);
+    }
+    .btn.primary:hover { background: #fde879; border-color: #fde879; color: var(--bg); }
+
+    .btn.ghost {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--fg-muted);
+    }
+    .btn.ghost:hover { color: var(--fg); border-color: var(--fg-muted); }
+
+    .btn.danger { color: var(--hot); border-color: var(--hot-soft); }
+    .btn.danger:hover { background: var(--hot-soft); border-color: var(--hot); }
+
+    .btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+    .link {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      transition: border-color .15s ease, color .15s ease;
+    }
+    .link:hover { color: var(--mark); border-bottom-color: var(--mark); }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html" class="here">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>buttons</h1>
+  <p class="lead">One default. Three variants. A page should have at most one <code>primary</code>; everything else is a <code>btn</code> or a <code>ghost</code>. If the page calls for two primary actions, the page is wrong.</p>
+
+  <h2>variants</h2>
+  <div class="snippet">
+    <div class="render row">
+      <button class="btn">default</button>
+      <button class="btn primary">primary</button>
+      <button class="btn ghost">ghost</button>
+      <button class="btn danger">danger</button>
+      <button class="btn" disabled>disabled</button>
+    </div>
+<pre><code>&lt;button class="btn"&gt;default&lt;/button&gt;
+&lt;button class="btn primary"&gt;primary&lt;/button&gt;
+&lt;button class="btn ghost"&gt;ghost&lt;/button&gt;
+&lt;button class="btn danger"&gt;danger&lt;/button&gt;
+&lt;button class="btn" disabled&gt;disabled&lt;/button&gt;</code></pre>
+  </div>
+
+  <h2>links that act like buttons</h2>
+  <p>Use an anchor when the action is navigation; only use a button when the action is, well, an action. The brand prefers an underlined link to a styled anchor — let the verb do the work.</p>
+  <div class="snippet">
+    <div class="render row">
+      <a class="link" href="#">read the docs</a>
+      <a class="btn" href="#">view source</a>
+    </div>
+<pre><code>&lt;a class="link" href="#"&gt;read the docs&lt;/a&gt;
+&lt;a class="btn" href="#"&gt;view source&lt;/a&gt;</code></pre>
+  </div>
+
+  <h2>css</h2>
+<pre><code>.btn {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: 8px 14px;
+  font-family: var(--font);
+  font-size: var(--t-2);
+  font-weight: 500;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  color: var(--fg);
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--fg-muted); }
+.btn:focus-visible { outline: 2px solid var(--mark); outline-offset: 2px; }
+.btn.primary { background: var(--mark); color: var(--bg); border-color: var(--mark); }
+.btn.ghost   { background: transparent; color: var(--fg-muted); }
+.btn.danger  { color: var(--hot); border-color: var(--hot-soft); }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }</code></pre>
+
+</main>
+
+</body>
+</html>

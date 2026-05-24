@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    .card {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-4);
+      color: var(--fg);
+    }
+    .card .top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: var(--s-3);
+    }
+    .card .top h3 {
+      font-family: var(--font);
+      font-size: var(--t-3);
+      font-weight: 500;
+      margin: 0;
+    }
+    .card .metric {
+      font-family: var(--font);
+      font-size: var(--t-5);
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      margin: var(--s-1) 0;
+    }
+    .card .delta {
+      font-family: var(--font);
+      font-size: var(--t-1);
+      color: var(--fg-muted);
+    }
+    .card .delta.ok   { color: var(--ok); }
+    .card .delta.warn { color: var(--warn); }
+    .card .delta.hot  { color: var(--hot); }
+
+    /* The same chip rules, scoped to demo cards */
+    .chip {
+      display: inline-block; padding: 3px 8px; border-radius: 999px;
+      background: var(--bg); color: var(--fg-muted);
+      font-family: var(--font); font-size: var(--t-1);
+    }
+    .chip.ok   { background: var(--ok-soft);   color: var(--ok); }
+    .chip.warn { background: var(--warn-soft); color: var(--warn); }
+    .chip.hot  { background: var(--hot-soft);  color: var(--hot); }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--s-3);
+    }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html" class="here">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>cards</h1>
+  <p class="lead">A bounded container — hairline border, one elevation, no shadow. Cards hold a single thought. If you find yourself nesting cards, restructure the page.</p>
+
+  <h2>basic</h2>
+  <div class="snippet">
+    <div class="render">
+      <div class="card">
+        <div class="top"><h3>title</h3></div>
+        <p>One card, one thought. The border is the boundary; the background is the elevation. Both come from tokens.</p>
+      </div>
+    </div>
+<pre><code>&lt;div class="card"&gt;
+  &lt;div class="top"&gt;&lt;h3&gt;title&lt;/h3&gt;&lt;/div&gt;
+  &lt;p&gt;One card, one thought.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>metric</h2>
+  <p>For dashboards. The metric is the visual subject; the chip and delta annotate it.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="grid-3">
+        <div class="card">
+          <div class="top"><h3>USDC</h3><span class="chip ok">pegged</span></div>
+          <div class="metric">$1.0009</div>
+          <div class="delta ok">+9.0 bps vs $1.00 peg</div>
+        </div>
+        <div class="card">
+          <div class="top"><h3>USDT</h3><span class="chip warn">warn</span></div>
+          <div class="metric">$0.9928</div>
+          <div class="delta warn">-72.0 bps vs $1.00 peg</div>
+        </div>
+        <div class="card">
+          <div class="top"><h3>DAI</h3><span class="chip hot">depeg</span></div>
+          <div class="metric">$0.9750</div>
+          <div class="delta hot">-250.0 bps vs $1.00 peg</div>
+        </div>
+      </div>
+    </div>
+<pre><code>&lt;div class="card"&gt;
+  &lt;div class="top"&gt;
+    &lt;h3&gt;USDC&lt;/h3&gt;
+    &lt;span class="chip ok"&gt;pegged&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="metric"&gt;$1.0009&lt;/div&gt;
+  &lt;div class="delta ok"&gt;+9.0 bps vs $1.00 peg&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>css</h2>
+<pre><code>.card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--s-4);
+}
+.card .top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: var(--s-3);
+}
+.card .metric {
+  font-family: var(--font);
+  font-size: var(--t-5);
+  color: var(--fg);
+}
+.card .delta { font-size: var(--t-1); color: var(--fg-muted); }
+.card .delta.ok   { color: var(--ok); }
+.card .delta.warn { color: var(--warn); }
+.card .delta.hot  { color: var(--hot); }</code></pre>
+
+</main>
+
+</body>
+</html>

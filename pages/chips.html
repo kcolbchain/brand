@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — chips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    /* The chip — status, meta, or tag.
+     * One height, monospace, soft background so it labels without shouting. */
+    .chip {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--bg-elev);
+      color: var(--fg-muted);
+      font-family: var(--font);
+      font-size: var(--t-1);
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+    }
+    .chip.ok   { background: var(--ok-soft);   color: var(--ok); }
+    .chip.warn { background: var(--warn-soft); color: var(--warn); }
+    .chip.hot  { background: var(--hot-soft);  color: var(--hot); }
+    .chip.mark { background: var(--mark-soft); color: var(--mark); }
+    .chip.dot::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      margin-right: 6px;
+      vertical-align: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html" class="here">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>chips</h1>
+  <p class="lead">Inline labels for status, meta, or tags. Monospace, soft background, never bold. A chip describes a value; it does not replace one.</p>
+
+  <h2>status</h2>
+  <p>Three states — <code>ok</code>, <code>warn</code>, <code>hot</code> — for any signal that has a runtime severity. The neutral chip carries metadata; the colored ones carry alarm. Never both at once.</p>
+  <div class="snippet">
+    <div class="render row">
+      <span class="chip">neutral</span>
+      <span class="chip ok">ok</span>
+      <span class="chip warn">warn</span>
+      <span class="chip hot">hot</span>
+    </div>
+<pre><code>&lt;span class="chip"&gt;neutral&lt;/span&gt;
+&lt;span class="chip ok"&gt;ok&lt;/span&gt;
+&lt;span class="chip warn"&gt;warn&lt;/span&gt;
+&lt;span class="chip hot"&gt;hot&lt;/span&gt;</code></pre>
+  </div>
+
+  <h2>with dot</h2>
+  <p>Add <code>.dot</code> when the chip is the entire status indicator — the bullet draws the eye to the state before the word.</p>
+  <div class="snippet">
+    <div class="render row">
+      <span class="chip ok dot">pegged</span>
+      <span class="chip warn dot">drifting</span>
+      <span class="chip hot dot">depeg</span>
+    </div>
+<pre><code>&lt;span class="chip ok dot"&gt;pegged&lt;/span&gt;
+&lt;span class="chip warn dot"&gt;drifting&lt;/span&gt;
+&lt;span class="chip hot dot"&gt;depeg&lt;/span&gt;</code></pre>
+  </div>
+
+  <h2>mark</h2>
+  <p>Use <code>.mark</code> sparingly — it borrows the brand yellow for emphasis. One per view, the same rule as the wordmark.</p>
+  <div class="snippet">
+    <div class="render row">
+      <span class="chip mark dot">live</span>
+    </div>
+<pre><code>&lt;span class="chip mark dot"&gt;live&lt;/span&gt;</code></pre>
+  </div>
+
+  <h2>css</h2>
+<pre><code>.chip {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  color: var(--fg-muted);
+  font-family: var(--font);
+  font-size: var(--t-1);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+.chip.ok   { background: var(--ok-soft);   color: var(--ok); }
+.chip.warn { background: var(--warn-soft); color: var(--warn); }
+.chip.hot  { background: var(--hot-soft);  color: var(--hot); }
+.chip.mark { background: var(--mark-soft); color: var(--mark); }
+.chip.dot::before {
+  content: ''; display: inline-block;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor;
+  margin-right: 6px; vertical-align: 1px;
+}</code></pre>
+
+</main>
+
+</body>
+</html>

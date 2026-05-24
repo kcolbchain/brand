@@ -17,6 +17,15 @@
   --mark:      #f5e03a;
   --mark-soft: rgba(245, 224, 58, 0.14);
 
+  /* State — for status only, never branding. The mark stays the mark.
+   * Desaturated on purpose so a status chip never out-shouts content. */
+  --ok:        #6ec07a;
+  --warn:      #d8b04d;
+  --hot:       #d97171;
+  --ok-soft:   rgba(110, 192, 122, 0.14);
+  --warn-soft: rgba(216, 176, 77, 0.14);
+  --hot-soft:  rgba(217, 113, 113, 0.14);
+
   /* Type system — JetBrains Mono, with system mono as fallback */
   --font: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --t-1:  11px;   /* labels, captions */

@@ -1,0 +1,143 @@
+/* Shared chrome for component snippet pages.
+ * Imports tokens.css from the parent dir. Keep this file thin: layout only,
+ * never component visuals (those live inline in each page so the snippet
+ * and the render are read together).
+ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  font-size: var(--t-2);
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--fg-muted);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+a:hover { color: var(--mark); border-bottom-color: var(--mark); }
+
+/* Top bar — breadcrumb back to /brand/, list of sibling pages */
+header.kit {
+  position: sticky; top: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s-3) var(--s-4);
+  font-size: var(--t-1);
+  background: rgba(11, 11, 13, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  z-index: 10;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+header.kit .wm { color: var(--fg); font-weight: 500; border-bottom: none; }
+header.kit .wm em { color: var(--mark); font-style: normal; font-weight: 700; }
+header.kit nav { display: flex; gap: var(--s-3); flex-wrap: wrap; }
+header.kit nav a { color: var(--fg-faint); border-bottom: none; }
+header.kit nav a:hover { color: var(--fg); border-bottom: none; }
+header.kit nav a.here { color: var(--fg); }
+
+main.kit {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: var(--s-6) var(--s-4) var(--s-7);
+}
+
+/* Page head */
+main.kit > h1 {
+  font-size: var(--t-5);
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: var(--s-2);
+  letter-spacing: -0.01em;
+}
+main.kit > h1::before { content: '— '; color: var(--fg-faint); }
+main.kit > .lead {
+  font-size: var(--t-3);
+  color: var(--fg-muted);
+  margin-bottom: var(--s-5);
+  max-width: 62ch;
+}
+
+/* Section heading inside a page */
+main.kit h2 {
+  font-size: var(--t-1);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-faint);
+  margin: var(--s-6) 0 var(--s-3);
+}
+main.kit h2::before { content: '— '; color: var(--fg-faint); }
+main.kit p + p { margin-top: var(--s-3); }
+main.kit p .fg { color: var(--fg); }
+
+/* The snippet block — render on top, code below.
+ * Stacked so you read render → code in a single eye-line. No tabs, no toggles. */
+.snippet {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  margin-bottom: var(--s-4);
+  overflow: hidden;
+}
+.snippet > .render {
+  padding: var(--s-4);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.snippet > .render.flow > * + * { margin-top: var(--s-2); }
+.snippet > .render.row { display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+.snippet > pre {
+  margin: 0;
+  padding: var(--s-3) var(--s-4);
+  font-size: var(--t-1);
+  color: var(--fg);
+  overflow-x: auto;
+  white-space: pre;
+}
+.snippet > pre code { font-family: var(--font); }
+
+/* Lone code block (no preceding render) */
+main.kit > pre {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--s-3) var(--s-4);
+  font-size: var(--t-1);
+  color: var(--fg);
+  overflow-x: auto;
+  margin: var(--s-3) 0 var(--s-4);
+}
+main.kit > pre code { font-family: var(--font); }
+
+/* Index grid for the components landing */
+.kit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+}
+.kit-grid a.tile {
+  display: block;
+  padding: var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  color: var(--fg);
+  text-decoration: none;
+}
+.kit-grid a.tile:hover { border-color: var(--mark); color: var(--mark); }
+.kit-grid a.tile .tile-name { font-size: var(--t-3); font-weight: 500; margin-bottom: var(--s-1); }
+.kit-grid a.tile .tile-meta { font-size: var(--t-1); color: var(--fg-faint); }
+
+@media (max-width: 560px) {
+  main.kit { padding: var(--s-5) var(--s-3) var(--s-6); }
+  header.kit { padding: var(--s-3); }
+  main.kit > h1 { font-size: var(--t-4); }
+}

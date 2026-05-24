@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — components</title>
+  <meta name="description" content="The kcolbchain component kit. One file per component. Copy what you need." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="../">tokens</a>
+    <a href="https://github.com/kcolbchain/brand">source</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>components</h1>
+  <p class="lead">One file per component. Each page renders the thing on top and shows the snippet underneath. Open the source, copy what you need, paste into your project. No build, no framework, no install.</p>
+
+  <h2>kit</h2>
+  <div class="kit-grid">
+    <a class="tile" href="chips.html">
+      <div class="tile-name">chips</div>
+      <div class="tile-meta">status · meta · tag</div>
+    </a>
+    <a class="tile" href="cards.html">
+      <div class="tile-name">cards</div>
+      <div class="tile-meta">panel · metric · with chip</div>
+    </a>
+    <a class="tile" href="buttons.html">
+      <div class="tile-name">buttons</div>
+      <div class="tile-meta">primary · ghost · link</div>
+    </a>
+    <a class="tile" href="forms.html">
+      <div class="tile-name">forms</div>
+      <div class="tile-meta">input · number · label row</div>
+    </a>
+    <a class="tile" href="tables.html">
+      <div class="tile-name">tables</div>
+      <div class="tile-meta">data · meta · zebra-free</div>
+    </a>
+    <a class="tile" href="code.html">
+      <div class="tile-name">code</div>
+      <div class="tile-meta">block · inline · prompt</div>
+    </a>
+    <a class="tile" href="alerts.html">
+      <div class="tile-name">alerts</div>
+      <div class="tile-meta">log line · banner</div>
+    </a>
+    <a class="tile" href="charts.html">
+      <div class="tile-name">charts</div>
+      <div class="tile-meta">sparkline · time series</div>
+    </a>
+    <a class="tile" href="nav.html">
+      <div class="tile-name">nav</div>
+      <div class="tile-meta">header · footer · breadcrumb</div>
+    </a>
+  </div>
+
+  <h2>how to read a page</h2>
+  <p>Every component page follows the same shape:</p>
+  <pre><code>render          ← what the component looks like, live
+markup          ← &lt;pre&gt; you can copy verbatim
+notes           ← when to use, when not to, what to swap</code></pre>
+
+  <p>No abstractions. No framework wrappers. If a component needs CSS, the CSS sits next to the markup on the same page. If something here can't be expressed as plain HTML + tokens, it doesn't belong in the kit.</p>
+
+  <h2>rules</h2>
+  <p><span class="fg">Tokens first.</span> Every value should reach for <code>var(--*)</code> before introducing a literal. If a value isn't in <a href="../tokens.css"><code>tokens.css</code></a>, ask whether the design needs it or you do.</p>
+  <p><span class="fg">One mark per view.</span> The yellow appears once. Status colors (<code>--ok</code>, <code>--warn</code>, <code>--hot</code>) are not marks — they're labels, used only when the data needs them.</p>
+  <p><span class="fg">No animation that costs a frame.</span> Hover transitions are fine. Scroll-jacks, parallax, and entrance choreography are not.</p>
+
+</main>
+
+</body>
+</html>

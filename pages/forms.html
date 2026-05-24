@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — forms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    .input, .select, .textarea {
+      font-family: var(--font);
+      font-size: var(--t-2);
+      color: var(--fg);
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 6px 10px;
+      line-height: 1.4;
+    }
+    .input:focus, .select:focus, .textarea:focus {
+      outline: none;
+      border-color: var(--fg-muted);
+    }
+    .input.num { width: 84px; text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* Label row — used in dashboards and config bars */
+    .label-row {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-2);
+      color: var(--fg-muted);
+      font-size: var(--t-1);
+    }
+    .label-row .unit { color: var(--fg-faint); }
+
+    .controls {
+      display: flex; flex-wrap: wrap; gap: var(--s-4);
+      align-items: center;
+      padding: var(--s-3) 0;
+    }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html" class="here">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>forms</h1>
+  <p class="lead">Monospace, tabular-nums for numbers, no rounded corners beyond the global radius. Labels sit inline with their input — a vertical stack of label-above-input wastes a row for no information.</p>
+
+  <h2>inputs</h2>
+  <div class="snippet">
+    <div class="render flow">
+      <label class="label-row">name <input class="input" type="text" placeholder="usdc" /></label>
+      <label class="label-row">warn <input class="input num" type="number" value="50" /> <span class="unit">bps</span></label>
+      <label class="label-row">source
+        <select class="select">
+          <option>binance</option>
+          <option>coinbase</option>
+          <option>uniswap_v3</option>
+          <option>curve</option>
+        </select>
+      </label>
+    </div>
+<pre><code>&lt;label class="label-row"&gt;name
+  &lt;input class="input" type="text" placeholder="usdc" /&gt;
+&lt;/label&gt;
+
+&lt;label class="label-row"&gt;warn
+  &lt;input class="input num" type="number" value="50" /&gt;
+  &lt;span class="unit"&gt;bps&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class="label-row"&gt;source
+  &lt;select class="select"&gt;
+    &lt;option&gt;binance&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/label&gt;</code></pre>
+  </div>
+
+  <h2>controls row</h2>
+  <p>The pattern for a dashboard control bar — flex row, wrap on small screens, gap from the spacing scale.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="controls">
+        <label class="label-row">warn <input class="input num" type="number" value="50" /> <span class="unit">bps</span></label>
+        <label class="label-row">critical <input class="input num" type="number" value="100" /> <span class="unit">bps</span></label>
+        <label class="label-row">refresh <input class="input num" type="number" value="30" /> <span class="unit">s</span></label>
+      </div>
+    </div>
+<pre><code>&lt;div class="controls"&gt;
+  &lt;label class="label-row"&gt;warn
+    &lt;input class="input num" type="number" value="50" /&gt;
+    &lt;span class="unit"&gt;bps&lt;/span&gt;
+  &lt;/label&gt;
+  ...
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>textarea</h2>
+  <div class="snippet">
+    <div class="render">
+      <textarea class="textarea" rows="3" style="width:100%" placeholder="prompt"></textarea>
+    </div>
+<pre><code>&lt;textarea class="textarea" rows="3" placeholder="prompt"&gt;&lt;/textarea&gt;</code></pre>
+  </div>
+
+  <h2>css</h2>
+<pre><code>.input, .select, .textarea {
+  font-family: var(--font);
+  font-size: var(--t-2);
+  color: var(--fg);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+}
+.input.num { width: 84px; text-align: right; font-variant-numeric: tabular-nums; }
+.label-row { display: inline-flex; align-items: center; gap: var(--s-2);
+             color: var(--fg-muted); font-size: var(--t-1); }
+.label-row .unit { color: var(--fg-faint); }
+.controls { display: flex; flex-wrap: wrap; gap: var(--s-4); }</code></pre>
+
+</main>
+
+</body>
+</html>

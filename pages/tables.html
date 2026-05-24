@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — tables</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    table.data {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font);
+      font-size: var(--t-2);
+      color: var(--fg);
+    }
+    table.data th {
+      font-size: var(--t-1);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--fg-faint);
+      text-align: left;
+      padding: var(--s-2) var(--s-3);
+      border-bottom: 1px solid var(--line);
+    }
+    table.data td {
+      padding: var(--s-2) var(--s-3);
+      border-bottom: 1px solid var(--line);
+      color: var(--fg-muted);
+    }
+    table.data tr:last-child td { border-bottom: none; }
+    table.data td.fg { color: var(--fg); }
+    table.data td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    table.data td.ok   { color: var(--ok); }
+    table.data td.warn { color: var(--warn); }
+    table.data td.hot  { color: var(--hot); }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html" class="here">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>tables</h1>
+  <p class="lead">No zebra stripes. The hairline between rows is enough; alternating fills add noise without information. Numbers are right-aligned and tabular; column heads are uppercase and small.</p>
+
+  <h2>data</h2>
+  <div class="snippet">
+    <div class="render">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>time</th>
+            <th>coin</th>
+            <th>source</th>
+            <th style="text-align:right">price</th>
+            <th style="text-align:right">deviation</th>
+            <th>severity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>14:21:03</td>
+            <td class="fg">USDC</td>
+            <td>binance</td>
+            <td class="num">$0.9941</td>
+            <td class="num warn">-59.0 bps</td>
+            <td class="warn">warn</td>
+          </tr>
+          <tr>
+            <td>14:20:33</td>
+            <td class="fg">USDT</td>
+            <td>coinbase</td>
+            <td class="num">$0.9802</td>
+            <td class="num hot">-198.0 bps</td>
+            <td class="hot">critical</td>
+          </tr>
+          <tr>
+            <td>14:20:03</td>
+            <td class="fg">DAI</td>
+            <td>curve</td>
+            <td class="num">$0.9996</td>
+            <td class="num ok">-4.0 bps</td>
+            <td class="ok">pegged</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<pre><code>&lt;table class="data"&gt;
+  &lt;thead&gt;&lt;tr&gt;
+    &lt;th&gt;time&lt;/th&gt;&lt;th&gt;coin&lt;/th&gt;&lt;th&gt;source&lt;/th&gt;
+    &lt;th style="text-align:right"&gt;price&lt;/th&gt;
+    &lt;th style="text-align:right"&gt;deviation&lt;/th&gt;
+    &lt;th&gt;severity&lt;/th&gt;
+  &lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;14:21:03&lt;/td&gt;
+      &lt;td class="fg"&gt;USDC&lt;/td&gt;
+      &lt;td&gt;binance&lt;/td&gt;
+      &lt;td class="num"&gt;$0.9941&lt;/td&gt;
+      &lt;td class="num warn"&gt;-59.0 bps&lt;/td&gt;
+      &lt;td class="warn"&gt;warn&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+  </div>
+
+  <h2>css</h2>
+<pre><code>table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font);
+  font-size: var(--t-2);
+  color: var(--fg);
+}
+table.data th {
+  font-size: var(--t-1); font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--fg-faint); text-align: left;
+  padding: var(--s-2) var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+table.data td {
+  padding: var(--s-2) var(--s-3);
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-muted);
+}
+table.data td.fg  { color: var(--fg); }
+table.data td.num { text-align: right; font-variant-numeric: tabular-nums; }</code></pre>
+
+</main>
+
+</body>
+</html>
