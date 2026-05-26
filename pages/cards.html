@@ -43,6 +43,29 @@
     .card .delta.warn { color: var(--warn); }
     .card .delta.hot  { color: var(--hot); }
 
+    /* module variant */
+    .card.module .body {
+      color: var(--fg-muted);
+      font-size: var(--t-2);
+      margin: 0 0 var(--s-3);
+    }
+    .card.module .body code {
+      font-family: var(--font);
+      color: var(--fg);
+      background: var(--bg);
+      padding: 0 4px;
+      border-radius: 2px;
+      font-size: 0.92em;
+    }
+    .card.module .foot {
+      display: flex; gap: var(--s-3); flex-wrap: wrap;
+      padding-top: var(--s-3);
+      border-top: 1px solid var(--line);
+      font-size: var(--t-1);
+    }
+    .card.module .foot a { border-bottom: none; color: var(--fg-faint); }
+    .card.module .foot a:hover { color: var(--mark); }
+
     /* The same chip rules, scoped to demo cards */
     .chip {
       display: inline-block; padding: 3px 8px; border-radius: 999px;
@@ -66,6 +89,9 @@
   <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; components</a>
   <nav>
     <a href="index.html">index</a>
+    <a href="logos.html">logos</a>
+    <a href="shapes.html">shapes</a>
+    <a href="layout.html">layout</a>
     <a href="chips.html">chips</a>
     <a href="cards.html" class="here">cards</a>
     <a href="buttons.html">buttons</a>
@@ -129,6 +155,60 @@
 &lt;/div&gt;</code></pre>
   </div>
 
+  <h2>module</h2>
+  <p>For documenting a library, capability, or piece of infrastructure. Title + status, a sentence of body, a footer row of links. Same skeleton as <em>basic</em>; the footer is the only addition.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="grid-3">
+        <div class="card module">
+          <div class="top">
+            <h3>x402_middleware</h3>
+            <span class="chip ok">shipped</span>
+          </div>
+          <p class="body">Server-side HTTP 402 gate. Drop into FastAPI or Flask; verifies <code>X-PAYMENT</code> signatures and emits the standard <code>accepts[]</code> envelope.</p>
+          <div class="foot">
+            <a href="#">source</a>
+            <a href="#">PR #19</a>
+            <a href="#">docs</a>
+          </div>
+        </div>
+        <div class="card module">
+          <div class="top">
+            <h3>zap_transport</h3>
+            <span class="chip warn">in PR</span>
+          </div>
+          <p class="body">Binary wire for <code>PaymentOffer</code> / <code>PaymentProof</code>. Zero-allocation; an order of magnitude smaller than JSON.</p>
+          <div class="foot">
+            <a href="#">source</a>
+            <a href="#">PR #21</a>
+          </div>
+        </div>
+        <div class="card module">
+          <div class="top">
+            <h3>SettlementRegistry</h3>
+            <span class="chip">design</span>
+          </div>
+          <p class="body">PQ-signed receipt anchor on LUX. The settlement surface for chain-agnostic agent payments. Pending Z's review.</p>
+          <div class="foot">
+            <a href="#">issue #59</a>
+          </div>
+        </div>
+      </div>
+    </div>
+<pre><code>&lt;div class="card module"&gt;
+  &lt;div class="top"&gt;
+    &lt;h3&gt;x402_middleware&lt;/h3&gt;
+    &lt;span class="chip ok"&gt;shipped&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;p class="body"&gt;Server-side HTTP 402 gate. Drop into FastAPI&hellip;&lt;/p&gt;
+  &lt;div class="foot"&gt;
+    &lt;a href="#"&gt;source&lt;/a&gt;
+    &lt;a href="#"&gt;PR #19&lt;/a&gt;
+    &lt;a href="#"&gt;docs&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
   <h2>css</h2>
 <pre><code>.card {
   background: var(--bg-elev);
@@ -148,7 +228,22 @@
 .card .delta { font-size: var(--t-1); color: var(--fg-muted); }
 .card .delta.ok   { color: var(--ok); }
 .card .delta.warn { color: var(--warn); }
-.card .delta.hot  { color: var(--hot); }</code></pre>
+.card .delta.hot  { color: var(--hot); }
+
+/* module variant */
+.card.module .body {
+  color: var(--fg-muted);
+  font-size: var(--t-2);
+  margin-bottom: var(--s-3);
+}
+.card.module .foot {
+  display: flex; gap: var(--s-3); flex-wrap: wrap;
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+  font-size: var(--t-1);
+}
+.card.module .foot a { border-bottom: none; color: var(--fg-faint); }
+.card.module .foot a:hover { color: var(--mark); }</code></pre>
 
 </main>
 

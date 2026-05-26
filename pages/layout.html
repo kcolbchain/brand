@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — layout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    /* Container — narrow (default) vs wide vs fluid */
+    .container {
+      max-width: var(--col);
+      margin: 0 auto;
+      padding: 0 var(--s-3);
+    }
+    .container.wide  { max-width: var(--col-wide); }
+    .container.fluid { max-width: none; }
+
+    .demo-container {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-3) 0;
+      color: var(--fg-muted);
+      font-size: var(--t-1);
+      text-align: center;
+    }
+
+    /* Grid — dashboard responsive */
+    .grid {
+      display: grid;
+      gap: var(--s-3);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+      .grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid.cols-4 { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1200px) {
+      .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+    .grid.auto {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    /* Two-col — sidebar + main */
+    .two-col {
+      display: grid;
+      gap: var(--s-4);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 880px) {
+      .two-col { grid-template-columns: 240px 1fr; }
+    }
+
+    /* Stack — vertical rhythm of section blocks */
+    .stack { display: flex; flex-direction: column; }
+    .stack.s3 > * + * { margin-top: var(--s-3); }
+    .stack.s4 > * + * { margin-top: var(--s-4); }
+    .stack.s5 > * + * { margin-top: var(--s-5); }
+    .stack.s6 > * + * { margin-top: var(--s-6); }
+
+    /* Section — heading + body, vertical rhythm with optional rule */
+    .section {
+      padding: var(--s-6) 0 var(--s-5);
+      border-top: 1px solid var(--line);
+    }
+    .section:first-child { border-top: none; padding-top: var(--s-4); }
+    .section .section-head {
+      display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3);
+      margin-bottom: var(--s-4);
+      flex-wrap: wrap;
+    }
+    .section .section-head h3 {
+      font-family: var(--font);
+      font-size: var(--t-4);
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .section .section-head .meta {
+      font-family: var(--font);
+      font-size: var(--t-1);
+      color: var(--fg-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Demo cell */
+    .cell {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-3);
+      color: var(--fg-muted);
+      font-family: var(--font);
+      font-size: var(--t-1);
+      text-align: center;
+    }
+
+    /* Hero — large heading + lead, with optional dot-grid behind */
+    .hero {
+      padding: var(--s-7) 0 var(--s-6);
+      position: relative;
+    }
+    .hero h2 {
+      font-size: var(--t-6);
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin: 0 0 var(--s-3);
+      text-transform: none;
+    }
+    .hero h2::before { content: none; }
+    .hero .hero-lead {
+      font-size: var(--t-3);
+      color: var(--fg-muted);
+      max-width: 56ch;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: var(--s-5) 0 var(--s-4); }
+      .hero h2 { font-size: var(--t-5); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; layout</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="logos.html">logos</a>
+    <a href="shapes.html">shapes</a>
+    <a href="layout.html" class="here">layout</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>layout</h1>
+  <p class="lead">Three containers, one grid system, one section rhythm. The kit defaults to prose-width (<code>--col: 720px</code>); reach for wide (<code>--col-wide: 1280px</code>) only on dashboards and product surfaces where information density is the point.</p>
+
+  <h2>containers</h2>
+  <p>Width is a choice the page makes once, at the top. Don't mix widths within a view.</p>
+  <div class="snippet">
+    <div class="render stack s3">
+      <div class="container"><div class="demo-container">--col · 720px · prose · the default</div></div>
+      <div class="container wide"><div class="demo-container">--col-wide · 1280px · dashboards, product surfaces</div></div>
+      <div class="container fluid"><div class="demo-container">fluid · full viewport · use when the content is itself a canvas (charts, maps)</div></div>
+    </div>
+<pre><code>&lt;div class="container"&gt;&lt;/div&gt;          /* default 720px */
+&lt;div class="container wide"&gt;&lt;/div&gt;     /* 1280px */
+&lt;div class="container fluid"&gt;&lt;/div&gt;    /* no max-width */</code></pre>
+  </div>
+
+  <h2>responsive grid</h2>
+  <p>A grid that breaks at the same widths everywhere in the system. 1 col under 640px; 2 cols 640–960; 3 cols 960–1200; 4 cols above. The auto variant fills available columns at a 220px minimum and is the right default for module dashboards.</p>
+  <div class="snippet">
+    <div class="render stack s4">
+      <div>
+        <div class="cell" style="background:var(--bg); margin-bottom: var(--s-2)">.grid.cols-2</div>
+        <div class="grid cols-2">
+          <div class="cell">1</div><div class="cell">2</div>
+        </div>
+      </div>
+      <div>
+        <div class="cell" style="background:var(--bg); margin-bottom: var(--s-2)">.grid.cols-3</div>
+        <div class="grid cols-3">
+          <div class="cell">1</div><div class="cell">2</div><div class="cell">3</div>
+        </div>
+      </div>
+      <div>
+        <div class="cell" style="background:var(--bg); margin-bottom: var(--s-2)">.grid.cols-4</div>
+        <div class="grid cols-4">
+          <div class="cell">1</div><div class="cell">2</div><div class="cell">3</div><div class="cell">4</div>
+        </div>
+      </div>
+      <div>
+        <div class="cell" style="background:var(--bg); margin-bottom: var(--s-2)">.grid.auto  ·  min 220px, fill the row</div>
+        <div class="grid auto">
+          <div class="cell">a</div><div class="cell">b</div><div class="cell">c</div><div class="cell">d</div><div class="cell">e</div>
+        </div>
+      </div>
+    </div>
+<pre><code>&lt;div class="grid cols-3"&gt;
+  &lt;div&gt;&lt;/div&gt; &lt;div&gt;&lt;/div&gt; &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- or, fill-as-you-go: --&gt;
+&lt;div class="grid auto"&gt;&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>two-col</h2>
+  <p>Sidebar + main. Collapses to one column under 880px, with the sidebar on top.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="two-col">
+        <div class="cell" style="padding: var(--s-4)">sidebar · 240px</div>
+        <div class="cell" style="padding: var(--s-4); background: var(--bg-elev)">main · fills the rest</div>
+      </div>
+    </div>
+<pre><code>&lt;div class="two-col"&gt;
+  &lt;aside&gt;&lt;/aside&gt;
+  &lt;main&gt;&lt;/main&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>stack — vertical rhythm</h2>
+  <p>Use to space children of a container by one of the system steps. Defaults: <code>s3</code> (16px) for tight bodies, <code>s4</code> (24px) for sections, <code>s5</code> (40px) between section blocks.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="stack s4">
+        <div class="cell">item</div>
+        <div class="cell">item</div>
+        <div class="cell">item</div>
+      </div>
+    </div>
+<pre><code>&lt;div class="stack s4"&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>section</h2>
+  <p>The unit of long-form structure on a page. Section head sits at <code>--t-4</code> (20px), with an uppercase meta-tag right-aligned. A 1px top rule separates sections; the first one drops the rule.</p>
+  <div class="snippet">
+    <div class="render">
+      <section class="section">
+        <div class="section-head">
+          <h3>multi-chain settlement</h3>
+          <span class="meta">issue #59 · design</span>
+        </div>
+        <p>Switchboard becomes chain-agnostic. Agents transact on TRON, AVAX, Base, or ETH; PQ-signed receipts anchor on LUX. The settlement layer is the only place an agent has to be.</p>
+      </section>
+      <section class="section">
+        <div class="section-head">
+          <h3>post-quantum signatures</h3>
+          <span class="meta">PQ-0 → PQ-5 · in flight</span>
+        </div>
+        <p>Every <code>PaymentProof</code> carries a <code>signature_alg</code> and a PQ signature. The wire format adds two fields; the verifier is dilithium-default with optional precompile dispatch on LUX.</p>
+      </section>
+    </div>
+<pre><code>&lt;section class="section"&gt;
+  &lt;div class="section-head"&gt;
+    &lt;h3&gt;heading&lt;/h3&gt;
+    &lt;span class="meta"&gt;tag · status&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;p&gt;body&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <h2>hero</h2>
+  <p>Single, big statement. <code>t-6</code> (44px) headline, <code>t-3</code> (15px) lead. Vertically padded so the rest of the page begins with breathing room.</p>
+  <div class="snippet">
+    <div class="render">
+      <section class="hero">
+        <h2>programmable payments for agents.</h2>
+        <p class="hero-lead">One Python library, one contract suite, one binary wire. Chain-agnostic. Token-agnostic. Post-quantum.</p>
+      </section>
+    </div>
+<pre><code>&lt;section class="hero"&gt;
+  &lt;h2&gt;headline&lt;/h2&gt;
+  &lt;p class="hero-lead"&gt;lead&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <h2>principles</h2>
+  <p><span class="fg">Width is a choice.</span> Prose default. Wide opt-in. Fluid only when the content is itself a canvas.</p>
+  <p><span class="fg">One grid.</span> The same 1/2/3/4 col breakpoints everywhere in the system. Bespoke breakpoints are bespoke debt.</p>
+  <p><span class="fg">Space is the section.</span> Section rhythm is the dominant cue; rules and meta-tags are the secondary cue. If you find yourself reaching for a third cue, restructure.</p>
+
+</main>
+
+</body>
+</html>
