@@ -4,9 +4,9 @@ Open **design tokens** for the kcolbchain visual identity. One typeface (JetBrai
 
 | Asset | Purpose |
 |--------|---------|
-| `tokens.css` | `:root` variables — type, color, space, state. Import or copy. |
+| `tokens.css` | `:root` variables — type, color, space, state, structure. Import or copy. |
 | `index.html` | The brand kit itself — type specimen, color, space, principles |
-| `pages/`     | Component snippets — chips, cards, buttons, forms, tables, code, alerts, charts, nav. One file per component; each page is the render + the markup. |
+| `pages/`     | One file per surface. **identity:** logos, shapes, layout. **components:** chips, cards, buttons, forms, tables, code, alerts, charts, nav. Each page is the render + the markup. |
 
 **Live site:** enable GitHub Pages on this repo (root `/`) → `https://kcolbchain.github.io/brand/`
 

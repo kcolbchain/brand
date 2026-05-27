@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — logos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    /* Wordmark */
+    .wordmark {
+      font-family: var(--font);
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .wordmark em {
+      color: var(--mark);
+      font-style: normal;
+      font-weight: 700;
+    }
+    .wordmark.t-6 { font-size: var(--t-6); }
+    .wordmark.t-5 { font-size: var(--t-5); }
+    .wordmark.t-4 { font-size: var(--t-4); }
+    .wordmark.t-3 { font-size: var(--t-3); }
+    .wordmark.t-2 { font-size: var(--t-2); }
+    .wordmark.mono { color: var(--fg); }
+    .wordmark.mono em { color: var(--fg); font-weight: 700; }
+
+    /* Lockup — wordmark + secondary descriptor */
+    .lockup {
+      display: inline-flex; align-items: baseline; gap: var(--s-3);
+      font-family: var(--font);
+    }
+    .lockup .sep {
+      color: var(--fg-faint);
+      font-weight: 400;
+    }
+    .lockup .desc {
+      color: var(--fg-muted);
+      font-weight: 400;
+      font-size: 0.65em;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+    }
+
+    /* Clear-space frame — visualize the protected zone */
+    .clearspace {
+      display: inline-block;
+      position: relative;
+      padding: var(--s-3);
+      outline: 1px dashed var(--fg-faint);
+      outline-offset: 0;
+    }
+    .clearspace::before,
+    .clearspace::after {
+      content: 'x';
+      position: absolute;
+      font-family: var(--font);
+      font-size: var(--t-1);
+      color: var(--fg-faint);
+    }
+    .clearspace::before { top: 2px; left: 6px; }
+    .clearspace::after  { bottom: 2px; right: 6px; }
+
+    /* Favicon canvases */
+    .favicon-row {
+      display: flex; gap: var(--s-4); align-items: flex-end; flex-wrap: wrap;
+    }
+    .favicon-row figure {
+      display: flex; flex-direction: column; align-items: center; gap: var(--s-2);
+    }
+    .favicon-row figcaption {
+      font-family: var(--font); font-size: var(--t-1); color: var(--fg-faint);
+    }
+    .favicon {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mark);
+      font-family: var(--font);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .favicon.sz-16 { width: 16px; height: 16px; font-size: 11px; border-radius: 2px; }
+    .favicon.sz-32 { width: 32px; height: 32px; font-size: 20px; border-radius: 3px; }
+    .favicon.sz-64 { width: 64px; height: 64px; font-size: 40px; }
+    .favicon.sz-128 { width: 128px; height: 128px; font-size: 80px; border-radius: 8px; }
+
+    .specimen-stack > * + * { margin-top: var(--s-4); }
+
+    .grid-row { display: flex; align-items: center; gap: var(--s-5); flex-wrap: wrap; }
+
+    .dos-donts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-3);
+    }
+    @media (max-width: 600px) { .dos-donts { grid-template-columns: 1fr; } }
+    .dos-donts > div {
+      padding: var(--s-3);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg);
+    }
+    .dos-donts h4 {
+      font-family: var(--font);
+      font-size: var(--t-1);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--s-2);
+    }
+    .dos-donts h4.do  { color: var(--ok); }
+    .dos-donts h4.dont { color: var(--hot); }
+    .dos-donts .ex { font-family: var(--font); font-size: var(--t-3); color: var(--fg); margin-top: var(--s-2); }
+    .dos-donts .ex em { color: var(--mark); font-style: normal; font-weight: 700; }
+    .dos-donts .ex.bad em { color: var(--hot); }
+
+    .scale-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 80px;
+      gap: var(--s-3);
+      align-items: baseline;
+      padding: var(--s-2) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .scale-row:last-child { border-bottom: none; }
+    .scale-row .label, .scale-row .px {
+      font-family: var(--font);
+      font-size: var(--t-1);
+      color: var(--fg-faint);
+    }
+    .scale-row .px { text-align: right; }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; logos</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="logos.html" class="here">logos</a>
+    <a href="shapes.html">shapes</a>
+    <a href="layout.html">layout</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>logos</h1>
+  <p class="lead">The kcolbchain mark is the wordmark. There is no glyph, no monogram, no animal. Two weights of one typeface, one accent. Set it in JetBrains Mono, color the first four letters with the mark color, leave the rest in body color. That's it.</p>
+
+  <h2>wordmark</h2>
+  <p>The four-letter accent reads as <em class="fg">kcolb</em>—the rest sits in body color. Use the colored form by default; reach for monochrome only when the surface forbids the mark color (print, debossing, single-color contexts).</p>
+  <div class="snippet">
+    <div class="render specimen-stack">
+      <div><span class="wordmark t-6"><em>kcolb</em>chain</span></div>
+      <div><span class="wordmark t-5"><em>kcolb</em>chain</span></div>
+      <div><span class="wordmark t-4"><em>kcolb</em>chain</span></div>
+    </div>
+<pre><code>&lt;span class="wordmark"&gt;&lt;em&gt;kcolb&lt;/em&gt;chain&lt;/span&gt;</code></pre>
+  </div>
+
+  <h2>monochrome</h2>
+  <p>For print, single-channel screens, deboss, or any context where the mark color would carry the wrong tone. The first four letters keep the weight; the color drops.</p>
+  <div class="snippet">
+    <div class="render specimen-stack">
+      <div><span class="wordmark mono t-5"><em>kcolb</em>chain</span></div>
+      <div><span class="wordmark mono t-3"><em>kcolb</em>chain</span></div>
+    </div>
+<pre><code>&lt;span class="wordmark mono"&gt;&lt;em&gt;kcolb&lt;/em&gt;chain&lt;/span&gt;</code></pre>
+  </div>
+
+  <h2>scale</h2>
+  <p>The wordmark sits on the type scale. Don't introduce sizes between these.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="scale-row">
+        <span class="label">t-6</span>
+        <span class="wordmark t-6"><em>kcolb</em>chain</span>
+        <span class="px">44px</span>
+      </div>
+      <div class="scale-row">
+        <span class="label">t-5</span>
+        <span class="wordmark t-5"><em>kcolb</em>chain</span>
+        <span class="px">28px</span>
+      </div>
+      <div class="scale-row">
+        <span class="label">t-4</span>
+        <span class="wordmark t-4"><em>kcolb</em>chain</span>
+        <span class="px">20px</span>
+      </div>
+      <div class="scale-row">
+        <span class="label">t-3</span>
+        <span class="wordmark t-3"><em>kcolb</em>chain</span>
+        <span class="px">15px</span>
+      </div>
+      <div class="scale-row">
+        <span class="label">t-2</span>
+        <span class="wordmark t-2"><em>kcolb</em>chain</span>
+        <span class="px">13px</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>lockups</h2>
+  <p>The wordmark may pair with a context descriptor — separated by a thin slash, with the descriptor set smaller and in faint color. Use lockups for navigation, breadcrumbs, and section headers — never as a primary identity.</p>
+  <div class="snippet">
+    <div class="render specimen-stack">
+      <div class="lockup">
+        <span class="wordmark t-4"><em>kcolb</em>chain</span>
+        <span class="sep">/</span>
+        <span class="desc">brand</span>
+      </div>
+      <div class="lockup">
+        <span class="wordmark t-4"><em>kcolb</em>chain</span>
+        <span class="sep">/</span>
+        <span class="desc">switchboard</span>
+      </div>
+      <div class="lockup">
+        <span class="wordmark t-4"><em>kcolb</em>chain</span>
+        <span class="sep">/</span>
+        <span class="desc">muzix</span>
+      </div>
+    </div>
+<pre><code>&lt;span class="lockup"&gt;
+  &lt;span class="wordmark"&gt;&lt;em&gt;kcolb&lt;/em&gt;chain&lt;/span&gt;
+  &lt;span class="sep"&gt;/&lt;/span&gt;
+  &lt;span class="desc"&gt;switchboard&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+  </div>
+
+  <h2>clear space</h2>
+  <p>Around any wordmark, hold at least one space token (<code>--s-3</code>, 16px at default) of clear space — measured from the cap-height of any neighboring element. The dashed frame visualizes the protected zone.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="clearspace">
+        <span class="wordmark t-5"><em>kcolb</em>chain</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>favicon</h2>
+  <p>The favicon strips everything but the mark color and the letter <strong>K</strong> in JetBrains Mono Bold. Sharp corners at small sizes; gentle round-off (1/8 of edge) at 64px and larger.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="favicon-row">
+        <figure><div class="favicon sz-16">K</div><figcaption>16</figcaption></figure>
+        <figure><div class="favicon sz-32">K</div><figcaption>32</figcaption></figure>
+        <figure><div class="favicon sz-64">K</div><figcaption>64</figcaption></figure>
+        <figure><div class="favicon sz-128">K</div><figcaption>128</figcaption></figure>
+      </div>
+    </div>
+<pre><code>&lt;link rel="icon"
+      href="https://kcolbchain.com/images/favicon.ico"&gt;</code></pre>
+  </div>
+
+  <h2>do / don't</h2>
+  <p>Restraint is the brand. The wordmark sits on the grid the type already lives on; outside of that grid it stops being the mark.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="dos-donts">
+        <div>
+          <h4 class="do">do</h4>
+          <div class="ex"><em>kcolb</em>chain</div>
+          <p style="margin-top:var(--s-2);font-size:var(--t-1);color:var(--fg-faint)">Mono. Mark on the first four letters. Body weight on the rest.</p>
+        </div>
+        <div>
+          <h4 class="dont">don't</h4>
+          <div class="ex bad" style="font-family:Georgia, serif"><em>Kcolb</em>chain</div>
+          <p style="margin-top:var(--s-2);font-size:var(--t-1);color:var(--fg-faint)">Don't reset in another typeface. Don't title-case. The whole word is lowercase.</p>
+        </div>
+        <div>
+          <h4 class="dont">don't</h4>
+          <div class="ex" style="color:var(--mark)"><em>kcolb</em>chain</div>
+          <p style="margin-top:var(--s-2);font-size:var(--t-1);color:var(--fg-faint)">Don't color the whole word in the mark. The mark is for four letters only.</p>
+        </div>
+        <div>
+          <h4 class="dont">don't</h4>
+          <div class="ex"><em>kcolb</em> chain</div>
+          <p style="margin-top:var(--s-2);font-size:var(--t-1);color:var(--fg-faint)">Don't put a space between halves. It is one word, set as one token.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>css</h2>
+<pre><code>.wordmark {
+  font-family: var(--font);
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.wordmark em {
+  color: var(--mark);
+  font-style: normal;
+  font-weight: 700;
+}
+.wordmark.mono em { color: var(--fg); }
+
+.lockup {
+  display: inline-flex; align-items: baseline; gap: var(--s-3);
+}
+.lockup .sep  { color: var(--fg-faint); }
+.lockup .desc {
+  color: var(--fg-muted);
+  font-size: 0.65em;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}</code></pre>
+
+</main>
+
+</body>
+</html>

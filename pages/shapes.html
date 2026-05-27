@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kcolbchain — shapes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="page.css" />
+  <style>
+    /* Rules — hairline dividers */
+    .rule {
+      height: 1px;
+      background: var(--line);
+      border: none;
+      margin: 0;
+    }
+    .rule.thick { height: 2px; }
+    .rule.mark-caret {
+      position: relative;
+    }
+    .rule.mark-caret::before {
+      content: '';
+      position: absolute;
+      left: 0; top: -1px;
+      width: 24px; height: 3px;
+      background: var(--mark);
+    }
+
+    /* Vertical rule */
+    .vrule {
+      display: inline-block;
+      width: 1px;
+      height: 24px;
+      background: var(--line);
+      vertical-align: middle;
+      margin: 0 var(--s-2);
+    }
+
+    /* Corner crops — CAD-style brackets */
+    .crop {
+      position: relative;
+      display: inline-block;
+      padding: var(--s-4);
+      min-width: 200px;
+      min-height: 60px;
+      color: var(--fg);
+      font-family: var(--font);
+    }
+    .crop::before,
+    .crop::after,
+    .crop > .br,
+    .crop > .bl {
+      content: '';
+      position: absolute;
+      width: 12px; height: 12px;
+      border: 1px solid var(--fg-faint);
+    }
+    .crop::before {
+      top: 0; left: 0;
+      border-right: none; border-bottom: none;
+    }
+    .crop::after {
+      top: 0; right: 0;
+      border-left: none; border-bottom: none;
+    }
+    .crop > .br {
+      bottom: 0; right: 0;
+      border-left: none; border-top: none;
+    }
+    .crop > .bl {
+      bottom: 0; left: 0;
+      border-right: none; border-top: none;
+    }
+    .crop.mark::before,
+    .crop.mark::after,
+    .crop.mark > .br,
+    .crop.mark > .bl { border-color: var(--mark); }
+
+    /* Sigils — geometric anchors */
+    .sigils {
+      display: flex; gap: var(--s-4); flex-wrap: wrap; align-items: center;
+    }
+    .sigils figure {
+      display: flex; flex-direction: column; align-items: center; gap: var(--s-2);
+    }
+    .sigils figcaption {
+      font-family: var(--font); font-size: var(--t-1); color: var(--fg-faint);
+    }
+    .sigil {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--fg);
+      font-family: var(--font);
+      line-height: 1;
+    }
+    .sigil.box {
+      border: 1px solid var(--fg);
+    }
+    .sigil.box-fill {
+      background: var(--fg);
+    }
+    .sigil.box-mark {
+      border: 1px solid var(--mark);
+      color: var(--mark);
+    }
+    .sigil.box-mark-fill {
+      background: var(--mark);
+      color: var(--bg);
+    }
+    .sigil.plus { font-size: 22px; font-weight: 400; }
+    .sigil.cross { font-size: 20px; font-weight: 400; }
+    .sigil.diamond {
+      width: 16px; height: 16px;
+      transform: rotate(45deg);
+      border: 1px solid var(--fg);
+    }
+    .sigil.dot {
+      width: 8px; height: 8px;
+      background: var(--fg);
+      border-radius: 50%;
+    }
+    .sigil.dot-mark { background: var(--mark); }
+    .sigil.ring {
+      width: 14px; height: 14px;
+      border: 2px solid var(--fg);
+      border-radius: 50%;
+    }
+
+    /* Dot grid background */
+    .dot-grid {
+      height: 120px;
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--fg-faint) 1px, transparent 1px);
+      background-size: 16px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+    }
+    .dot-grid.tight {
+      background-size: 8px 8px;
+    }
+
+    /* Frame — perimeter hairline */
+    .frame {
+      padding: var(--s-4);
+      border: 1px solid var(--fg-faint);
+      color: var(--fg);
+      font-family: var(--font);
+    }
+    .frame.mark { border-color: var(--mark); }
+    .frame.dashed { border-style: dashed; border-color: var(--fg-faint); }
+
+    /* Mark accents — text inline */
+    .accent-under em {
+      font-style: normal;
+      background-image: linear-gradient(var(--mark), var(--mark));
+      background-position: 0 90%;
+      background-repeat: no-repeat;
+      background-size: 100% 3px;
+      color: var(--fg);
+    }
+    .accent-over em {
+      font-style: normal;
+      background-image: linear-gradient(var(--mark), var(--mark));
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: 100% 3px;
+      color: var(--fg);
+      padding-top: 4px;
+    }
+    .accent-block em {
+      font-style: normal;
+      background: var(--mark-soft);
+      color: var(--mark);
+      padding: 0 4px;
+    }
+
+    .stack > * + * { margin-top: var(--s-3); }
+    .row { display: flex; gap: var(--s-4); flex-wrap: wrap; align-items: center; }
+  </style>
+</head>
+<body>
+
+<header class="kit">
+  <a class="wm" href="../"><em>kcolb</em>chain &nbsp;/&nbsp; brand &nbsp;/&nbsp; shapes</a>
+  <nav>
+    <a href="index.html">index</a>
+    <a href="logos.html">logos</a>
+    <a href="shapes.html" class="here">shapes</a>
+    <a href="layout.html">layout</a>
+    <a href="chips.html">chips</a>
+    <a href="cards.html">cards</a>
+    <a href="buttons.html">buttons</a>
+    <a href="forms.html">forms</a>
+    <a href="tables.html">tables</a>
+    <a href="code.html">code</a>
+    <a href="alerts.html">alerts</a>
+    <a href="charts.html">charts</a>
+    <a href="nav.html">nav</a>
+  </nav>
+</header>
+
+<main class="kit">
+
+  <h1>shapes</h1>
+  <p class="lead">The non-typographic elements of the system. Hairline rules, corner crops, geometric sigils, dot grids — the marks between content. Each shape exists because space alone can't carry every separation; when it can, the shape doesn't appear.</p>
+
+  <h2>rules</h2>
+  <p>One pixel of border color. The default hairline divides two thoughts inside the same surface. The mark-caret variant adds a short yellow segment at the leftmost 24px — use it once per page, on the section the page is actually about.</p>
+  <div class="snippet">
+    <div class="render stack">
+      <hr class="rule">
+      <hr class="rule mark-caret">
+      <hr class="rule thick">
+    </div>
+<pre><code>&lt;hr class="rule"&gt;
+&lt;hr class="rule mark-caret"&gt;
+&lt;hr class="rule thick"&gt;</code></pre>
+  </div>
+
+  <h2>vertical rule</h2>
+  <p>Inline divider. Use sparingly — only when two adjacent items don't fit on the type baseline.</p>
+  <div class="snippet">
+    <div class="render">
+      <span style="color:var(--fg)">on</span>
+      <span class="vrule"></span>
+      <span style="color:var(--fg-muted)">off</span>
+      <span class="vrule"></span>
+      <span style="color:var(--fg-faint)">unknown</span>
+    </div>
+<pre><code>&lt;span class="vrule"&gt;&lt;/span&gt;</code></pre>
+  </div>
+
+  <h2>corner crops</h2>
+  <p>Bracket marks at the four corners of a container — registration marks for the document. They imply a frame without rendering it. Use the mark variant exactly once per view, on the section the page exists for.</p>
+  <div class="snippet">
+    <div class="render row">
+      <div class="crop">
+        <div class="bl"></div><div class="br"></div>
+        x402_middleware<br>shipped · PR #19
+      </div>
+      <div class="crop mark">
+        <div class="bl"></div><div class="br"></div>
+        SettlementRegistry<br>design · #59
+      </div>
+    </div>
+<pre><code>&lt;div class="crop"&gt;
+  &lt;div class="bl"&gt;&lt;/div&gt;&lt;div class="br"&gt;&lt;/div&gt;
+  content
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>sigils</h2>
+  <p>Small geometric marks used as section anchors, list bullets, status pips, and inline labels. They are the only iconography the system ships. If a glyph isn't on this list, find one that is.</p>
+  <div class="snippet">
+    <div class="render">
+      <div class="sigils">
+        <figure><div class="sigil box"></div><figcaption>box</figcaption></figure>
+        <figure><div class="sigil box-fill"></div><figcaption>box-fill</figcaption></figure>
+        <figure><div class="sigil box-mark"></div><figcaption>box-mark</figcaption></figure>
+        <figure><div class="sigil box-mark-fill"></div><figcaption>mark-fill</figcaption></figure>
+        <figure><div class="sigil plus">+</div><figcaption>plus</figcaption></figure>
+        <figure><div class="sigil cross">×</div><figcaption>cross</figcaption></figure>
+        <figure><div class="sigil"><div class="sigil diamond"></div></div><figcaption>diamond</figcaption></figure>
+        <figure><div class="sigil"><div class="sigil dot"></div></div><figcaption>dot</figcaption></figure>
+        <figure><div class="sigil"><div class="sigil dot dot-mark"></div></div><figcaption>dot-mark</figcaption></figure>
+        <figure><div class="sigil"><div class="sigil ring"></div></div><figcaption>ring</figcaption></figure>
+      </div>
+    </div>
+<pre><code>&lt;div class="sigil box"&gt;&lt;/div&gt;
+&lt;div class="sigil plus"&gt;+&lt;/div&gt;
+&lt;div class="sigil dot dot-mark"&gt;&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>dot grid</h2>
+  <p>Background pattern. Visualizes the spatial grid the layout sits on. Used sparingly — on a hero, an empty state, or a section that wants to admit it's a canvas. The default tile is 16px; the tight variant is 8px.</p>
+  <div class="snippet">
+    <div class="render stack">
+      <div class="dot-grid"></div>
+      <div class="dot-grid tight"></div>
+    </div>
+<pre><code>&lt;div class="dot-grid"&gt;&lt;/div&gt;
+&lt;div class="dot-grid tight"&gt;&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>frame</h2>
+  <p>A full-perimeter hairline. Use when a container needs to be read as a unit and the type alone isn't enough. The dashed variant signals provisional content — a draft, a stub, a TBD.</p>
+  <div class="snippet">
+    <div class="render row">
+      <div class="frame">finalized</div>
+      <div class="frame mark">primary</div>
+      <div class="frame dashed">provisional</div>
+    </div>
+<pre><code>&lt;div class="frame"&gt;&lt;/div&gt;
+&lt;div class="frame mark"&gt;&lt;/div&gt;
+&lt;div class="frame dashed"&gt;&lt;/div&gt;</code></pre>
+  </div>
+
+  <h2>mark accent</h2>
+  <p>Highlight a word inside a sentence. Three variants: an underline (the default), an overline, and a soft block. One mark per paragraph; the mark drops to zero if the paragraph is already the most important thing on the page.</p>
+  <div class="snippet">
+    <div class="render stack">
+      <p class="accent-under" style="color:var(--fg-muted)">Switchboard is the <em>chain-agnostic</em> and <em>token-agnostic</em> payment substrate for agents.</p>
+      <p class="accent-over" style="color:var(--fg-muted)">Settlement finalizes on <em>LUX</em> regardless of which chain the agents transacted on.</p>
+      <p class="accent-block" style="color:var(--fg-muted)">PQ envelope is <em>mandatory</em>, not optional, on the canonical receipt format.</p>
+    </div>
+<pre><code>&lt;p class="accent-under"&gt;text with &lt;em&gt;mark&lt;/em&gt; inside&lt;/p&gt;
+&lt;p class="accent-over"&gt;text with &lt;em&gt;mark&lt;/em&gt; inside&lt;/p&gt;
+&lt;p class="accent-block"&gt;text with &lt;em&gt;mark&lt;/em&gt; inside&lt;/p&gt;</code></pre>
+  </div>
+
+  <h2>principles</h2>
+  <p><span class="fg">No icons.</span> The sigil set is the icon set. If a concept needs a glyph and a sigil doesn't fit, write the word.</p>
+  <p><span class="fg">No decoration.</span> Every shape carries information: a separation, a boundary, an anchor, a status. Shapes that decorate are shapes that lie.</p>
+  <p><span class="fg">Hairline.</span> All borders are 1px. The thick rule is 2px and exists for the one place per page where 1px disappears.</p>
+
+</main>
+
+</body>
+</html>

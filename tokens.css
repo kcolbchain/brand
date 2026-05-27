@@ -46,6 +46,7 @@
   --s-8: 160px;
 
   /* Structure */
-  --col:    720px;
-  --radius: 4px;
+  --col:       720px;   /* prose-width column — the default */
+  --col-wide:  1280px;  /* dashboard / wide-canvas — opt-in via .wide */
+  --radius:    4px;
 }
